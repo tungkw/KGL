@@ -1,0 +1,67 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe 生成活动文件",
+            "command": "C:\\Program Files\\mingw\\bin\\g++.exe",
+            "args": [
+                "-D",
+                "__USE_MINGW_ANSI_STDIO=1",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-I",
+                "./dep/glfw/include",
+                "-l",
+                "glfw3dll",
+                "-l",
+                "Opengl32",
+                "-l",
+                "mingw32",
+                "-l",
+                "kernel32",
+                "-l",
+                "Gdi32",
+                "-L",
+                "./dep/glfw/lib-mingw"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "调试器生成的任务。"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe 生成活动文件 ver(1)",
+            "command": "C:\\Program Files\\mingw\\bin\\g++.exe",
+            "args": [
+                "${file}",
+                "-o", "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-I", "./dep/glfw/include",
+                "-I", "./dep/glew/include",
+                "-L", "./dep/glfw/lib-static-ucrt",
+                "-L", "./dep/glew/lib/Release/Win32",
+                "-l", "glew32s",
+                "-l", "glfw3",
+                "-l", "Opengl32",
+                "-l", "Gdi32",
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}
