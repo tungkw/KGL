@@ -1,6 +1,6 @@
 {
     "files.associations": {
-        "iostream": "cpp",
+        "strstream": "cpp",
         "*.tcc": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
@@ -13,12 +13,15 @@
         "exception": "cpp",
         "system_error": "cpp",
         "type_traits": "cpp",
+        "fstream": "cpp",
         "initializer_list": "cpp",
         "iosfwd": "cpp",
+        "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
         "ostream": "cpp",
+        "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",

@@ -3,7 +3,44 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 #include <malloc.h>
+
+struct ShaderNode{
+    std::string vertex_shader;
+    std::string fragment_shader; 
+};
+
+static ShaderNode ParseShader(const std::string &file_name)
+{
+    std::ifstream fin(file_name.c_str(), std::ios::in);
+    if (!fin.is_open())
+    {
+        std::cout << "shader file not found" << std::endl;
+        return {"", ""};
+    }
+
+    std::string line;
+    std::stringstream ss[2];
+    int state = -1;
+    while (getline(fin, line))
+    {
+        if (line.find("vertex") != line.npos)
+        {
+            state = 0;
+        }
+        else if (line.find("fragment") != line.npos)
+        {
+            state = 1;
+        }
+        else if (state != -1)
+        {
+            ss[state] << line << '\n';
+        }        
+    }
+    return { ss[0].str(), ss[1].str() };
+}
 
 static unsigned int CompileShader(GLuint type, const std::string& source)
 {
@@ -66,43 +103,38 @@ int main(void)
 
     unsigned int buffer_id;
     glGenBuffers(1, &buffer_id);
-
-    glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
-    
-    float data[6] = {
+    float data[] = {
         -0.5f,  0.5f,
-        0.0f, -0.5f,
-        0.5f,  0.5f,
+        0.5f, 0.5f,
+        0.5f,  -0.5f,
+        -0.5f,  -0.5f,
     };
-    glBufferData(GL_ARRAY_BUFFER, 6*sizeof(float), data, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
+    glBufferData(GL_ARRAY_BUFFER, 4*2*sizeof(float), data, GL_STATIC_DRAW);
 
 
     // glVertexAttribPointer(index, num_of_elements_of_one_attrubute, type_of_element_of_one_attribute, need_normalized, stride_byte, start_byte);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2*sizeof(float), (const void*)0);
-
     glEnableVertexAttribArray(0); //index
 
 
-    std::string vertex_shader = 
-    "#version 330 core\n"
-    "layout(location=0) in vec4 position;"
-    "void main()"
-    "{"
-    "   gl_Position = position;"
-    "}"
-    ;
-
-    std::string fragment_shader = 
-    "#version 330 core\n"
-    "layout(location=0) out vec4 color;"
-    "void main()"
-    "{"
-    "   color = vec4(1., 0., 0., 1.0);"
-    "}"
-    ;
-    
-    unsigned int shader = CreateShader(vertex_shader, fragment_shader);
+    ShaderNode sn = ParseShader(std::string("res/shaders/shader.hlsl"));
+    std::cout << "vertex" << std::endl;
+    std::cout << sn.vertex_shader << std::endl;
+    std::cout << "fragment" << std::endl;
+    std::cout << sn.fragment_shader << std::endl;
+    unsigned int shader = CreateShader(sn.vertex_shader, sn.fragment_shader);
     glUseProgram(shader);
+
+
+    unsigned int index_buffer_id;
+    glGenBuffers(1, &index_buffer_id);
+    unsigned int indices[6] = {
+        0, 3, 1,
+        3, 2, 1,
+    };
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_id);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6*sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
 
     /* Loop until the user closes the window */
@@ -111,8 +143,9 @@ int main(void)
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-
+        // glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+        
         // lagecy
         // glBegin(GL_TRIANGLES);
         // glVertex2f(-0.5f,  0.5f);
