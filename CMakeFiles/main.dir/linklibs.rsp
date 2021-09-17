@@ -1,0 +1,1 @@
+  -LC:/Users/91498/Documents/code/opengl_l/./dep/glew/lib/Release/Win32  -LC:/Users/91498/Documents/code/opengl_l/./dep/glfw/lib-static-ucrt  -lglew32s -lglfw3 -lOpengl32 -lGdi32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

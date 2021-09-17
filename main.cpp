@@ -1,13 +1,15 @@
-#define GLEW_STATIC
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "KiHeader.h"
+#include "KiLogger.h"
+#include "KiVertexBuffer.h"
+#include "KiIndexBuffer.h"
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <malloc.h>
 
-struct ShaderNode{
+struct ShaderNode
+{
     std::string vertex_shader;
     std::string fragment_shader; 
 };
@@ -101,41 +103,33 @@ int main(void)
     if(glewInit() != GLEW_OK) std::cout << "error" << std::endl;
     else std::cout << glGetString(GL_VERSION) << std::endl;
 
-    unsigned int buffer_id;
-    glGenBuffers(1, &buffer_id);
     float data[] = {
         -0.5f,  0.5f,
         0.5f, 0.5f,
         0.5f,  -0.5f,
         -0.5f,  -0.5f,
     };
-    glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
-    glBufferData(GL_ARRAY_BUFFER, 4*2*sizeof(float), data, GL_STATIC_DRAW);
+    KiVertexBuffer vb(data, 4*2*sizeof(float));
 
+
+    unsigned int indices[6] = {
+        0, 3, 1,
+        3, 2, 1,
+    };
+    KiIndexBuffer ib(indices, 6);
+    
 
     // glVertexAttribPointer(index, num_of_elements_of_one_attrubute, type_of_element_of_one_attribute, need_normalized, stride_byte, start_byte);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2*sizeof(float), (const void*)0);
     glEnableVertexAttribArray(0); //index
 
-
     ShaderNode sn = ParseShader(std::string("res/shaders/shader.hlsl"));
-    std::cout << "vertex" << std::endl;
-    std::cout << sn.vertex_shader << std::endl;
-    std::cout << "fragment" << std::endl;
-    std::cout << sn.fragment_shader << std::endl;
     unsigned int shader = CreateShader(sn.vertex_shader, sn.fragment_shader);
     glUseProgram(shader);
 
-
-    unsigned int index_buffer_id;
-    glGenBuffers(1, &index_buffer_id);
-    unsigned int indices[6] = {
-        0, 3, 1,
-        3, 2, 1,
-    };
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6*sizeof(unsigned int), indices, GL_STATIC_DRAW);
-
+    GLint loc = glGetUniformLocation(shader, "u_Color");
+    GLfloat r = 0.0;
+    GLfloat inc = 0.001;
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -144,8 +138,14 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         // glDrawArrays(GL_TRIANGLES, 0, 3);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
         
+        glUniform4f(loc, r, 0.2, 0.8, 1.0);
+        KICALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0));
+        
+        if (r > 1.0) inc = -0.001;
+        else if (r < 0.0) inc = 0.001;
+        r += inc;
+
         // lagecy
         // glBegin(GL_TRIANGLES);
         // glVertex2f(-0.5f,  0.5f);
