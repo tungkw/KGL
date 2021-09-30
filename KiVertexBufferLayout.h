@@ -8,9 +8,11 @@
 struct KiVertexBufferElement
 {
     GLuint index;
-    GLint size;
     GLenum type;
+    GLint count;
     GLboolean normalized;
+    KiVertexBufferElement(GLuint _index, GLenum _type, GLint _count, GLboolean _normalized)
+        : index(_index), type(_type), count(_count), normalized(_normalized) {}
 };
 
 class KiVertexBufferLayout
@@ -21,17 +23,13 @@ private:
 public:
     KiVertexBufferLayout()
         : stride(0) {};
-    ~KiVertexBufferLayout();
+
+    template<class T> void Push(GLsizei count);
 
     GLsizei GetStride() { return stride; }
-    KiVertexBufferElement& GetElement(int i) { return elements[i]; }
+    int GetSize() { return elements.size(); }
+    KiVertexBufferElement& GetElement(int i) { return elements[i];}
 
-    template<class>
-    void Push<float>(unsigned int count)
-    {
-        GLint size = typeof(GL_FLOAT) * count
-        elements.push_back({ elements.size(), size, GL_FLOAT, GL_TRUE});
-    }
 };
 
 #endif

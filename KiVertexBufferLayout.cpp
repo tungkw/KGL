@@ -1,14 +1,13 @@
 #include "KiVertexBufferLayout.h"
 
 
-KiVertexBufferLayout::KiVertexBufferLayout()
+
+
+template<>
+void KiVertexBufferLayout::Push<GLfloat>(GLsizei count)
 {
-
-}
-
-KiVertexBufferLayout::~KiVertexBufferLayout()
-{
-
+    elements.push_back({elements.size(), GL_FLOAT, count, GL_FALSE});
+    stride += sizeof(GL_FLOAT) * count;
 }
 
 // void KiVertexBufferLayout::

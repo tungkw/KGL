@@ -14,6 +14,22 @@ CMakeFiles/main.dir/KiLogger.cpp.obj: KiLogger.h
 CMakeFiles/main.dir/KiLogger.cpp.obj: dep/glew/include/GL/glew.h
 CMakeFiles/main.dir/KiLogger.cpp.obj: dep/glfw/include/GLFW/glfw3.h
 
+CMakeFiles/main.dir/KiShader.cpp.obj: KiHeader.h
+CMakeFiles/main.dir/KiShader.cpp.obj: KiLogger.h
+CMakeFiles/main.dir/KiShader.cpp.obj: KiShader.cpp
+CMakeFiles/main.dir/KiShader.cpp.obj: KiShader.h
+CMakeFiles/main.dir/KiShader.cpp.obj: dep/glew/include/GL/glew.h
+CMakeFiles/main.dir/KiShader.cpp.obj: dep/glfw/include/GLFW/glfw3.h
+
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiHeader.h
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiLogger.h
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiVertexArray.cpp
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiVertexArray.h
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiVertexBuffer.h
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiVertexBufferLayout.h
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: dep/glew/include/GL/glew.h
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: dep/glfw/include/GLFW/glfw3.h
+
 CMakeFiles/main.dir/KiVertexBuffer.cpp.obj: KiHeader.h
 CMakeFiles/main.dir/KiVertexBuffer.cpp.obj: KiLogger.h
 CMakeFiles/main.dir/KiVertexBuffer.cpp.obj: KiVertexBuffer.cpp
@@ -21,10 +37,21 @@ CMakeFiles/main.dir/KiVertexBuffer.cpp.obj: KiVertexBuffer.h
 CMakeFiles/main.dir/KiVertexBuffer.cpp.obj: dep/glew/include/GL/glew.h
 CMakeFiles/main.dir/KiVertexBuffer.cpp.obj: dep/glfw/include/GLFW/glfw3.h
 
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: KiHeader.h
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: KiLogger.h
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: KiVertexBufferLayout.cpp
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: KiVertexBufferLayout.h
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: dep/glew/include/GL/glew.h
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: dep/glfw/include/GLFW/glfw3.h
+
 CMakeFiles/main.dir/main.cpp.obj: KiHeader.h
 CMakeFiles/main.dir/main.cpp.obj: KiIndexBuffer.h
 CMakeFiles/main.dir/main.cpp.obj: KiLogger.h
+CMakeFiles/main.dir/main.cpp.obj: KiRender.h
+CMakeFiles/main.dir/main.cpp.obj: KiShader.h
+CMakeFiles/main.dir/main.cpp.obj: KiVertexArray.h
 CMakeFiles/main.dir/main.cpp.obj: KiVertexBuffer.h
+CMakeFiles/main.dir/main.cpp.obj: KiVertexBufferLayout.h
 CMakeFiles/main.dir/main.cpp.obj: main.cpp
 CMakeFiles/main.dir/main.cpp.obj: dep/glew/include/GL/glew.h
 CMakeFiles/main.dir/main.cpp.obj: dep/glfw/include/GLFW/glfw3.h

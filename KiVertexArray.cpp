@@ -1,4 +1,4 @@
-#include <KiVertexArray.h>
+#include "KiVertexArray.h"
 
 KiVertexArray::KiVertexArray()
 {
@@ -10,23 +10,33 @@ KiVertexArray::~KiVertexArray()
     KICALL(glDeleteVertexArrays(1, &m_id));
 }
 
-void KiVertexArray::Add(KiVertexBuffer vb,  KiVertexBufferLayout vbl)
+GLsizei KiVertexArray::SizeOf(GLenum type){
+    switch (type)
+    {
+        case GL_FLOAT: return sizeof(GLfloat);
+    }
+    return 0;
+}
+
+void KiVertexArray::Add(KiVertexBuffer& vb,  KiVertexBufferLayout& vbl)
 {
     Bind();
     vb.Bind();
     unsigned int pointer = 0;
-    for(int i = 0; i < vbl.elements.size(); i++)
+    GLsizei stride = vbl.GetStride();
+    for(int i = 0; i < vbl.GetSize(); i++)
     {
+        KiVertexBufferElement e = vbl.GetElement(i);
         KICALL(glVertexAttribPointer(
-            i, 
-            vbl.elements[i].size, 
-            vbl.elements[i].type, 
-            vbl.elements[i].normalized, 
-            vbl.GetStride(), 
+            e.index,
+            e.count, 
+            e.type, 
+            e.normalized, 
+            stride, 
             (const void *)pointer
         ));
-        KICALL(glEnableVertexAttribArray(i));
-        pointer += vbl.elements[i].size;
+        KICALL(glEnableVertexAttribArray(e.index));
+        pointer += e.count * SizeOf(e.type);
     }
 }
 

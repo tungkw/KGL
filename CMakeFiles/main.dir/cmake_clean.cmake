@@ -1,7 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/KiIndexBuffer.cpp.obj"
   "CMakeFiles/main.dir/KiLogger.cpp.obj"
+  "CMakeFiles/main.dir/KiShader.cpp.obj"
+  "CMakeFiles/main.dir/KiVertexArray.cpp.obj"
   "CMakeFiles/main.dir/KiVertexBuffer.cpp.obj"
+  "CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj"
   "CMakeFiles/main.dir/main.cpp.obj"
   "libmain.dll.a"
   "main.exe"

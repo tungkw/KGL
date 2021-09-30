@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
+# COMPILE_FLAGS(-std=c++11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 project(KiGL)
 
 include_directories(
@@ -15,4 +17,13 @@ link_libraries(
     Opengl32
     Gdi32
 )
-add_executable(main main.cpp KiLogger.cpp KiVertexBuffer.cpp KiIndexBuffer.cpp)
+add_executable(main 
+    main.cpp 
+    KiLogger.cpp 
+    KiVertexBuffer.cpp 
+    KiIndexBuffer.cpp
+    KiVertexArray.cpp
+    KiVertexBufferLayout.cpp
+    KiShader.cpp
+    # KiRender.cpp
+)

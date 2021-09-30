@@ -196,6 +196,60 @@ KiLogger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiLogger.cpp.s
 .PHONY : KiLogger.cpp.s
 
+KiShader.obj: KiShader.cpp.obj
+
+.PHONY : KiShader.obj
+
+# target to build an object file
+KiShader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiShader.cpp.obj
+.PHONY : KiShader.cpp.obj
+
+KiShader.i: KiShader.cpp.i
+
+.PHONY : KiShader.i
+
+# target to preprocess a source file
+KiShader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiShader.cpp.i
+.PHONY : KiShader.cpp.i
+
+KiShader.s: KiShader.cpp.s
+
+.PHONY : KiShader.s
+
+# target to generate assembly for a file
+KiShader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiShader.cpp.s
+.PHONY : KiShader.cpp.s
+
+KiVertexArray.obj: KiVertexArray.cpp.obj
+
+.PHONY : KiVertexArray.obj
+
+# target to build an object file
+KiVertexArray.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiVertexArray.cpp.obj
+.PHONY : KiVertexArray.cpp.obj
+
+KiVertexArray.i: KiVertexArray.cpp.i
+
+.PHONY : KiVertexArray.i
+
+# target to preprocess a source file
+KiVertexArray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiVertexArray.cpp.i
+.PHONY : KiVertexArray.cpp.i
+
+KiVertexArray.s: KiVertexArray.cpp.s
+
+.PHONY : KiVertexArray.s
+
+# target to generate assembly for a file
+KiVertexArray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiVertexArray.cpp.s
+.PHONY : KiVertexArray.cpp.s
+
 KiVertexBuffer.obj: KiVertexBuffer.cpp.obj
 
 .PHONY : KiVertexBuffer.obj
@@ -222,6 +276,33 @@ KiVertexBuffer.s: KiVertexBuffer.cpp.s
 KiVertexBuffer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiVertexBuffer.cpp.s
 .PHONY : KiVertexBuffer.cpp.s
+
+KiVertexBufferLayout.obj: KiVertexBufferLayout.cpp.obj
+
+.PHONY : KiVertexBufferLayout.obj
+
+# target to build an object file
+KiVertexBufferLayout.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj
+.PHONY : KiVertexBufferLayout.cpp.obj
+
+KiVertexBufferLayout.i: KiVertexBufferLayout.cpp.i
+
+.PHONY : KiVertexBufferLayout.i
+
+# target to preprocess a source file
+KiVertexBufferLayout.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiVertexBufferLayout.cpp.i
+.PHONY : KiVertexBufferLayout.cpp.i
+
+KiVertexBufferLayout.s: KiVertexBufferLayout.cpp.s
+
+.PHONY : KiVertexBufferLayout.s
+
+# target to generate assembly for a file
+KiVertexBufferLayout.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiVertexBufferLayout.cpp.s
+.PHONY : KiVertexBufferLayout.cpp.s
 
 main.obj: main.cpp.obj
 
@@ -265,9 +346,18 @@ help:
 	@echo ... KiLogger.obj
 	@echo ... KiLogger.i
 	@echo ... KiLogger.s
+	@echo ... KiShader.obj
+	@echo ... KiShader.i
+	@echo ... KiShader.s
+	@echo ... KiVertexArray.obj
+	@echo ... KiVertexArray.i
+	@echo ... KiVertexArray.s
 	@echo ... KiVertexBuffer.obj
 	@echo ... KiVertexBuffer.i
 	@echo ... KiVertexBuffer.s
+	@echo ... KiVertexBufferLayout.obj
+	@echo ... KiVertexBufferLayout.i
+	@echo ... KiVertexBufferLayout.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

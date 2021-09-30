@@ -14,6 +14,22 @@ CMakeFiles/main.dir/KiLogger.cpp.obj
  C:/Users/91498/Documents/code/opengl_l/KiLogger.h
  dep/glew/include/GL/glew.h
  dep/glfw/include/GLFW/glfw3.h
+CMakeFiles/main.dir/KiShader.cpp.obj
+ C:/Users/91498/Documents/code/opengl_l/KiHeader.h
+ C:/Users/91498/Documents/code/opengl_l/KiLogger.h
+ C:/Users/91498/Documents/code/opengl_l/KiShader.cpp
+ C:/Users/91498/Documents/code/opengl_l/KiShader.h
+ dep/glew/include/GL/glew.h
+ dep/glfw/include/GLFW/glfw3.h
+CMakeFiles/main.dir/KiVertexArray.cpp.obj
+ C:/Users/91498/Documents/code/opengl_l/KiHeader.h
+ C:/Users/91498/Documents/code/opengl_l/KiLogger.h
+ C:/Users/91498/Documents/code/opengl_l/KiVertexArray.cpp
+ C:/Users/91498/Documents/code/opengl_l/KiVertexArray.h
+ C:/Users/91498/Documents/code/opengl_l/KiVertexBuffer.h
+ C:/Users/91498/Documents/code/opengl_l/KiVertexBufferLayout.h
+ dep/glew/include/GL/glew.h
+ dep/glfw/include/GLFW/glfw3.h
 CMakeFiles/main.dir/KiVertexBuffer.cpp.obj
  C:/Users/91498/Documents/code/opengl_l/KiHeader.h
  C:/Users/91498/Documents/code/opengl_l/KiLogger.h
@@ -21,11 +37,22 @@ CMakeFiles/main.dir/KiVertexBuffer.cpp.obj
  C:/Users/91498/Documents/code/opengl_l/KiVertexBuffer.h
  dep/glew/include/GL/glew.h
  dep/glfw/include/GLFW/glfw3.h
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj
+ C:/Users/91498/Documents/code/opengl_l/KiHeader.h
+ C:/Users/91498/Documents/code/opengl_l/KiLogger.h
+ C:/Users/91498/Documents/code/opengl_l/KiVertexBufferLayout.cpp
+ C:/Users/91498/Documents/code/opengl_l/KiVertexBufferLayout.h
+ dep/glew/include/GL/glew.h
+ dep/glfw/include/GLFW/glfw3.h
 CMakeFiles/main.dir/main.cpp.obj
  C:/Users/91498/Documents/code/opengl_l/KiHeader.h
  C:/Users/91498/Documents/code/opengl_l/KiIndexBuffer.h
  C:/Users/91498/Documents/code/opengl_l/KiLogger.h
+ C:/Users/91498/Documents/code/opengl_l/KiRender.h
+ C:/Users/91498/Documents/code/opengl_l/KiShader.h
+ C:/Users/91498/Documents/code/opengl_l/KiVertexArray.h
  C:/Users/91498/Documents/code/opengl_l/KiVertexBuffer.h
+ C:/Users/91498/Documents/code/opengl_l/KiVertexBufferLayout.h
  C:/Users/91498/Documents/code/opengl_l/main.cpp
  dep/glew/include/GL/glew.h
  dep/glfw/include/GLFW/glfw3.h

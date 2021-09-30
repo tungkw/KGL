@@ -25,6 +25,16 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "array": "cpp",
+        "utility": "cpp",
+        "cmath": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "numeric": "cpp"
     }
 }

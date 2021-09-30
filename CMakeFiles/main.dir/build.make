@@ -132,12 +132,57 @@ CMakeFiles/main.dir/KiIndexBuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/KiIndexBuffer.cpp.s"
 	C:\PROGRA~1\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\91498\Documents\code\opengl_l\KiIndexBuffer.cpp -o CMakeFiles\main.dir\KiIndexBuffer.cpp.s
 
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiVertexArray.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\91498\Documents\code\opengl_l\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/KiVertexArray.cpp.obj"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\KiVertexArray.cpp.obj -c C:\Users\91498\Documents\code\opengl_l\KiVertexArray.cpp
+
+CMakeFiles/main.dir/KiVertexArray.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/KiVertexArray.cpp.i"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\91498\Documents\code\opengl_l\KiVertexArray.cpp > CMakeFiles\main.dir\KiVertexArray.cpp.i
+
+CMakeFiles/main.dir/KiVertexArray.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/KiVertexArray.cpp.s"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\91498\Documents\code\opengl_l\KiVertexArray.cpp -o CMakeFiles\main.dir\KiVertexArray.cpp.s
+
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj: KiVertexBufferLayout.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\91498\Documents\code\opengl_l\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\KiVertexBufferLayout.cpp.obj -c C:\Users\91498\Documents\code\opengl_l\KiVertexBufferLayout.cpp
+
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/KiVertexBufferLayout.cpp.i"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\91498\Documents\code\opengl_l\KiVertexBufferLayout.cpp > CMakeFiles\main.dir\KiVertexBufferLayout.cpp.i
+
+CMakeFiles/main.dir/KiVertexBufferLayout.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/KiVertexBufferLayout.cpp.s"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\91498\Documents\code\opengl_l\KiVertexBufferLayout.cpp -o CMakeFiles\main.dir\KiVertexBufferLayout.cpp.s
+
+CMakeFiles/main.dir/KiShader.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/KiShader.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/KiShader.cpp.obj: KiShader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\91498\Documents\code\opengl_l\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main.dir/KiShader.cpp.obj"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\KiShader.cpp.obj -c C:\Users\91498\Documents\code\opengl_l\KiShader.cpp
+
+CMakeFiles/main.dir/KiShader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/KiShader.cpp.i"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\91498\Documents\code\opengl_l\KiShader.cpp > CMakeFiles\main.dir\KiShader.cpp.i
+
+CMakeFiles/main.dir/KiShader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/KiShader.cpp.s"
+	C:\PROGRA~1\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\91498\Documents\code\opengl_l\KiShader.cpp -o CMakeFiles\main.dir\KiShader.cpp.s
+
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/main.cpp.obj" \
 "CMakeFiles/main.dir/KiLogger.cpp.obj" \
 "CMakeFiles/main.dir/KiVertexBuffer.cpp.obj" \
-"CMakeFiles/main.dir/KiIndexBuffer.cpp.obj"
+"CMakeFiles/main.dir/KiIndexBuffer.cpp.obj" \
+"CMakeFiles/main.dir/KiVertexArray.cpp.obj" \
+"CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj" \
+"CMakeFiles/main.dir/KiShader.cpp.obj"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
@@ -146,11 +191,14 @@ main.exe: CMakeFiles/main.dir/main.cpp.obj
 main.exe: CMakeFiles/main.dir/KiLogger.cpp.obj
 main.exe: CMakeFiles/main.dir/KiVertexBuffer.cpp.obj
 main.exe: CMakeFiles/main.dir/KiIndexBuffer.cpp.obj
+main.exe: CMakeFiles/main.dir/KiVertexArray.cpp.obj
+main.exe: CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj
+main.exe: CMakeFiles/main.dir/KiShader.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
 main.exe: CMakeFiles/main.dir/linklibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\91498\Documents\code\opengl_l\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\91498\Documents\code\opengl_l\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

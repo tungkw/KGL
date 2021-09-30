@@ -6,7 +6,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/91498/Documents/code/opengl_l/KiIndexBuffer.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiIndexBuffer.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/KiLogger.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiLogger.cpp.obj"
+  "C:/Users/91498/Documents/code/opengl_l/KiShader.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiShader.cpp.obj"
+  "C:/Users/91498/Documents/code/opengl_l/KiVertexArray.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiVertexArray.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/KiVertexBuffer.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiVertexBuffer.cpp.obj"
+  "C:/Users/91498/Documents/code/opengl_l/KiVertexBufferLayout.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/main.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

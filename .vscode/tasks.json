@@ -6,6 +6,7 @@
             "command": "C:\\Program Files\\mingw\\bin\\g++.exe",
             "args": [
                 "${file}",
+                "-std=c++11",
                 "-o", "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-I", "./dep/glfw/include",
                 "-I", "./dep/glew/include",

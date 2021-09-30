@@ -10,12 +10,13 @@ class KiVertexArray
 {
 private:
     unsigned int m_id;
+    GLsizei SizeOf(GLenum type);
 
 public:
     KiVertexArray();
     ~KiVertexArray();
 
-    void Add(KiVertexBuffer, KiVertexBufferLayout);
+    void Add(KiVertexBuffer&, KiVertexBufferLayout&);
     void Bind();
     void Unbind();
 };
