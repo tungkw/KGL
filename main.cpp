@@ -1,9 +1,3 @@
-#include "KiHeader.h"
-#include "KiLogger.h"
-#include "KiVertexBuffer.h"
-#include "KiIndexBuffer.h"
-#include "KiVertexArray.h"
-#include "KiShader.h"
 #include "KiRender.h"
 #include <iostream>
 #include <string>
@@ -34,20 +28,21 @@ int main(void)
 
     /* start drawing */
     float data[] = {
-        -0.5f,  0.5f,
-        0.5f, 0.5f,
-        0.5f,  -0.5f,
-        -0.5f,  -0.5f,
+        -0.5f,  0.5f,   0,  0,
+        0.5f,   0.5f,   1,  0,
+        0.5f,  -0.5f,   1,  1,
+        -0.5f,  -0.5f,  0,  1,
     };
     unsigned int indices[6] = {
         0, 3, 1,
         3, 2, 1,
     };
 
-    KiVertexBuffer vb(data, 4*2*sizeof(float));
+    KiVertexBuffer vb(data, 4*4*sizeof(float));
     KiIndexBuffer ib(indices, 6);
 
     KiVertexBufferLayout vbl;
+    vbl.Push<GLfloat>(2);
     vbl.Push<GLfloat>(2);
 
     KiVertexArray va;
@@ -55,6 +50,10 @@ int main(void)
 
     KiShader shader("res/shaders/shader.hlsl");
     shader.Compile();
+
+    KiTexture texture("res/tex.png");
+    texture.Bind(0);
+    // shader.SetUniform<int>(1, GL_INT, "u_Texture", std::vector<int>({0}));
 
     va.Unbind();
     vb.Unbind();
@@ -71,19 +70,13 @@ int main(void)
         render.Clear();
 
         shader.Bind();
-        shader.SetUniform(4, GL_FLOAT, "u_Color", std::vector<float>({float(r), 0.2, 0.8, 1.0}));
+        shader.SetUniform4f("u_Color", r, 0.2, 0.8, 1.0);
 
         render.Draw(va, ib, shader);
-        
-        // va.Bind();
-        // ib.Bind();
-        // KICALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0));
-        
+
         if (r > 1.0) inc = -0.001;
         else if (r < 0.0) inc = 0.001;
         r += inc;
-        
-        // va.Bind();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

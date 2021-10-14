@@ -23,7 +23,7 @@ class KiShader
 private:
     ShaderNode sn;
     std::string file_name;
-    unsigned int shader_id;
+    int shader_id;
     ShaderNode ParseShader(const std::string &file_name);
     unsigned int CompileShader(GLuint type, const std::string& source);
     unsigned int CreateShader(const std::string &vertex_shader, const std::string &fragment_shader);
@@ -34,15 +34,16 @@ public:
     void Bind();
     void Unbind();
     
-    template<typename T>
-    void SetUniform(GLsizei size, GLenum type, std::string uname, std::vector<T> values)
+    void SetUniform4f(std::string name, float v1, float v2,  float v3,  float v4)
     {
-        if(size == 4 && type == GL_FLOAT)
-        {
-            GLint loc = glGetUniformLocation(shader_id, uname.c_str());
-            // auto iter = values.begin();
-            KICALL(glUniform4f(loc, values[0], values[1], values[2], values[3]));
-        }
+        GLint loc = glGetUniformLocation(shader_id, name.c_str());
+        KICALL(glUniform4f(loc, v1, v2, v3, v4));
+    }
+    
+    void SetUniform1i(std::string name, int v1)
+    {
+        GLint loc = glGetUniformLocation(shader_id, name.c_str());
+        KICALL(glUniform1i(loc, v1));
     }
 };
 

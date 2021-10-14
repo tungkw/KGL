@@ -7,10 +7,12 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/91498/Documents/code/opengl_l/KiIndexBuffer.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiIndexBuffer.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/KiLogger.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiLogger.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/KiShader.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiShader.cpp.obj"
+  "C:/Users/91498/Documents/code/opengl_l/KiTexture.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiTexture.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/KiVertexArray.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiVertexArray.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/KiVertexBuffer.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiVertexBuffer.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/KiVertexBufferLayout.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/KiVertexBufferLayout.cpp.obj"
   "C:/Users/91498/Documents/code/opengl_l/main.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/main.cpp.obj"
+  "C:/Users/91498/Documents/code/opengl_l/utils/stb_image/stb_image.cpp" "C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,6 +20,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "./dep/glew/include"
   "./dep/glfw/include"
+  "./utils/stb_image"
   )
 
 # Targets to which this target links.

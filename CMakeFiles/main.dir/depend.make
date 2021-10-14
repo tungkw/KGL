@@ -21,6 +21,14 @@ CMakeFiles/main.dir/KiShader.cpp.obj: KiShader.h
 CMakeFiles/main.dir/KiShader.cpp.obj: dep/glew/include/GL/glew.h
 CMakeFiles/main.dir/KiShader.cpp.obj: dep/glfw/include/GLFW/glfw3.h
 
+CMakeFiles/main.dir/KiTexture.cpp.obj: KiHeader.h
+CMakeFiles/main.dir/KiTexture.cpp.obj: KiLogger.h
+CMakeFiles/main.dir/KiTexture.cpp.obj: KiTexture.cpp
+CMakeFiles/main.dir/KiTexture.cpp.obj: KiTexture.h
+CMakeFiles/main.dir/KiTexture.cpp.obj: utils/stb_image/stb_image.h
+CMakeFiles/main.dir/KiTexture.cpp.obj: dep/glew/include/GL/glew.h
+CMakeFiles/main.dir/KiTexture.cpp.obj: dep/glfw/include/GLFW/glfw3.h
+
 CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiHeader.h
 CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiLogger.h
 CMakeFiles/main.dir/KiVertexArray.cpp.obj: KiVertexArray.cpp
@@ -49,10 +57,15 @@ CMakeFiles/main.dir/main.cpp.obj: KiIndexBuffer.h
 CMakeFiles/main.dir/main.cpp.obj: KiLogger.h
 CMakeFiles/main.dir/main.cpp.obj: KiRender.h
 CMakeFiles/main.dir/main.cpp.obj: KiShader.h
+CMakeFiles/main.dir/main.cpp.obj: KiTexture.h
 CMakeFiles/main.dir/main.cpp.obj: KiVertexArray.h
 CMakeFiles/main.dir/main.cpp.obj: KiVertexBuffer.h
 CMakeFiles/main.dir/main.cpp.obj: KiVertexBufferLayout.h
 CMakeFiles/main.dir/main.cpp.obj: main.cpp
+CMakeFiles/main.dir/main.cpp.obj: utils/stb_image/stb_image.h
 CMakeFiles/main.dir/main.cpp.obj: dep/glew/include/GL/glew.h
 CMakeFiles/main.dir/main.cpp.obj: dep/glfw/include/GLFW/glfw3.h
+
+CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.obj: utils/stb_image/stb_image.cpp
+CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.obj: utils/stb_image/stb_image.h
 

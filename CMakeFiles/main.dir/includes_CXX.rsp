@@ -1,1 +1,1 @@
--IC:/Users/91498/Documents/code/opengl_l/./dep/glew/include -IC:/Users/91498/Documents/code/opengl_l/./dep/glfw/include 
+-IC:/Users/91498/Documents/code/opengl_l/./dep/glew/include -IC:/Users/91498/Documents/code/opengl_l/./dep/glfw/include -IC:/Users/91498/Documents/code/opengl_l/./utils/stb_image 

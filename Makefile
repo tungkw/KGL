@@ -223,6 +223,33 @@ KiShader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiShader.cpp.s
 .PHONY : KiShader.cpp.s
 
+KiTexture.obj: KiTexture.cpp.obj
+
+.PHONY : KiTexture.obj
+
+# target to build an object file
+KiTexture.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiTexture.cpp.obj
+.PHONY : KiTexture.cpp.obj
+
+KiTexture.i: KiTexture.cpp.i
+
+.PHONY : KiTexture.i
+
+# target to preprocess a source file
+KiTexture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiTexture.cpp.i
+.PHONY : KiTexture.cpp.i
+
+KiTexture.s: KiTexture.cpp.s
+
+.PHONY : KiTexture.s
+
+# target to generate assembly for a file
+KiTexture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/KiTexture.cpp.s
+.PHONY : KiTexture.cpp.s
+
 KiVertexArray.obj: KiVertexArray.cpp.obj
 
 .PHONY : KiVertexArray.obj
@@ -331,6 +358,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+utils/stb_image/stb_image.obj: utils/stb_image/stb_image.cpp.obj
+
+.PHONY : utils/stb_image/stb_image.obj
+
+# target to build an object file
+utils/stb_image/stb_image.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.obj
+.PHONY : utils/stb_image/stb_image.cpp.obj
+
+utils/stb_image/stb_image.i: utils/stb_image/stb_image.cpp.i
+
+.PHONY : utils/stb_image/stb_image.i
+
+# target to preprocess a source file
+utils/stb_image/stb_image.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.i
+.PHONY : utils/stb_image/stb_image.cpp.i
+
+utils/stb_image/stb_image.s: utils/stb_image/stb_image.cpp.s
+
+.PHONY : utils/stb_image/stb_image.s
+
+# target to generate assembly for a file
+utils/stb_image/stb_image.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.s
+.PHONY : utils/stb_image/stb_image.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -349,6 +403,9 @@ help:
 	@echo ... KiShader.obj
 	@echo ... KiShader.i
 	@echo ... KiShader.s
+	@echo ... KiTexture.obj
+	@echo ... KiTexture.i
+	@echo ... KiTexture.s
 	@echo ... KiVertexArray.obj
 	@echo ... KiVertexArray.i
 	@echo ... KiVertexArray.s
@@ -361,6 +418,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... utils/stb_image/stb_image.obj
+	@echo ... utils/stb_image/stb_image.i
+	@echo ... utils/stb_image/stb_image.s
 .PHONY : help
 
 

@@ -5,6 +5,7 @@
 #include "KiIndexBuffer.h"
 #include "KiShader.h"
 #include "KiLogger.h"
+#include "KiTexture.h"
 
 class KiRender
 {
