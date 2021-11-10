@@ -3,11 +3,15 @@
 layout(location=0) in vec4 position;
 layout(location=1) in vec2 texCoord;
 
+uniform mat4 mvp;
+
 out vec2 v_TexCoord;
 
 void main()
 {
-   gl_Position = position;
+   vec4 pos = mvp * position;
+   // gl_Position = pos / pos.w;
+   gl_Position = pos;
    v_TexCoord = texCoord;
 }
 

@@ -1,3 +1,0 @@
-C:/Users/91498/Documents/code/opengl_l/CMakeFiles/edit_cache.dir
-C:/Users/91498/Documents/code/opengl_l/CMakeFiles/main.dir
-C:/Users/91498/Documents/code/opengl_l/CMakeFiles/rebuild_cache.dir
