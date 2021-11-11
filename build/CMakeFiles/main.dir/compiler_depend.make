@@ -3075,6 +3075,9 @@ CMakeFiles/main.dir/main.cpp.obj: ../main.cpp \
   C:/Program\ Files\ (x86)/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/fstream.tcc \
   ../Texture.h \
   ../utils/stb_image/stb_image.h \
+  ../BatchRender.h \
+  ../Object.h \
+  ../Cuboid.h \
   ../Transformation.h
 
 CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.obj: ../utils/stb_image/stb_image.cpp \
@@ -3699,6 +3702,8 @@ C:/Program\ Files\ (x86)/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/al
 
 ../dep/eigen/Eigen/src/Core/util/Memory.h:
 
+../BatchRender.h:
+
 ../dep/eigen/Eigen/src/Core/util/IntegralConstant.h:
 
 ../dep/eigen/Eigen/src/Core/GeneralProduct.h:
@@ -3925,6 +3930,8 @@ C:/Program\ Files\ (x86)/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bi
 
 ../dep/eigen/Eigen/src/Eigenvalues/ComplexSchur.h:
 
+../Object.h:
+
 ../dep/eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h:
 
 ../dep/eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h:
@@ -3944,6 +3951,8 @@ C:/Program\ Files\ (x86)/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bi
 ../VertexBufferLayout.h:
 
 ../VertexBuffer.cpp:
+
+../Cuboid.h:
 
 ../Transformation.h:
 

@@ -9,13 +9,10 @@ namespace kgl
 class VertexBuffer{
 private:
     unsigned int m_id;
-    char * buffer;
-    int size;
 public:
-    VertexBuffer(unsigned int max_size);
+    VertexBuffer(const void *data, unsigned int size);
     ~VertexBuffer();
-    void Add(const void *data, unsigned int size);
-    void Attach();
+    void 
     void Bind();
     void Unbind();
 };

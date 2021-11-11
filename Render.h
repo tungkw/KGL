@@ -75,7 +75,7 @@ void Render::Draw(VertexArray& va, IndexBuffer& ib, Shader& shader)
     va.Bind();
     ib.Bind();
     shader.Bind();
-    KGLCALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);)
+    KGLCALL(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, (void*)0);)
 }
     
 } // namespace kgl

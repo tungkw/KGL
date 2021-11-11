@@ -33,6 +33,6 @@ add_executable(main
     VertexBufferLayout.cpp
     Shader.cpp
     Texture.cpp
-    # Render.cpp
+    
     ./utils/stb_image/stb_image.cpp
 )

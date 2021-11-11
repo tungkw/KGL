@@ -392,4 +392,6 @@ CMakeFiles/main.dir/main.cpp.obj: \
  C:/PROGRA~2/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/fstream.tcc \
  C:\Users\tungkw\Documents\code\opengl_l\Texture.h \
  C:\Users\tungkw\Documents\code\opengl_l\utils/stb_image/stb_image.h \
- C:\Users\tungkw\Documents\code\opengl_l\Transformation.h
+ C:\Users\tungkw\Documents\code\opengl_l\Transformation.h \
+ C:\Users\tungkw\Documents\code\opengl_l\Cuboid.h \
+ C:\Users\tungkw\Documents\code\opengl_l\Object.h
