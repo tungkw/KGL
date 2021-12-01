@@ -1,8 +1,16 @@
 #include "Render.h"
 #include "Transformation.h"
-#include "Cuboid.h"
+#include "Geometry/Cuboid.h"
+#include "Geometry/Line.h"
+#include "Geometry/Vertice.h"
+#include "Buffer.h"
 #include <iostream>
 #include <string>
+
+
+    // kgl::Texture texture("res/tex.png");
+    // texture.Bind(0);
+    // shader.SetUniform<int>(1, GL_INT, "u_Texture", std::vector<int>({0}));
 
 int main(void)
 {
@@ -10,69 +18,73 @@ int main(void)
     kgl::Render* render = new kgl::Render;
     render->Open(640, 480, "Hello World");
 
-    kgl::Cuboid obj(1, 2, 1);
-    kgl::Cuboid obj2;
+    // // triangles
+    // kgl::Cuboid obj(1, 2, 1);
+    // kgl::Cuboid obj2;
     
-    Eigen::Matrix4f pose = Eigen::Matrix4f::Identity();
-    pose(0, 3) = -1;
-    obj.SetPose(pose);
-    pose(0, 3) = 1;
-    obj2.SetPose(pose);
+    // Eigen::Matrix4f pose = Eigen::Matrix4f::Identity();
+    // pose(0, 3) = -1;
+    // obj.SetPose(pose);
 
-    kgl::VertexBuffer vb(1000);
-    vb.Add(obj.vertex, sizeof(kgl::Vertice)*obj.num_vertex);
-    vb.Add(obj2.vertex, sizeof(kgl::Vertice)*obj2.num_vertex);
-    vb.Attach();
+    // pose(0, 3) = 1;
+    // obj2.SetPose(pose);
 
-    kgl::IndexBuffer ib(1000);
-    ib.Add(obj.faces, obj.num_faces*3, 0);
-    ib.Add(obj2.faces, obj2.num_faces*3, obj.num_vertex);
-    ib.Attach();
+    // kgl::TriangleBuffer<kgl::NormalVertice> triangle_buffer;
+    // triangle_buffer.Add(&obj);
+    // triangle_buffer.Add(&obj2);
+    // triangle_buffer.Attach();
 
-    kgl::VertexBufferLayout vbl;
-    vbl.Push<GLfloat>((offsetof(kgl::Vertice, color) - offsetof(kgl::Vertice, pos)) / sizeof(float));
-    vbl.Push<GLfloat>((offsetof(kgl::Vertice, tex_id) - offsetof(kgl::Vertice, color)) / sizeof(float));
-    vbl.Push<GLfloat>((offsetof(kgl::Vertice, tex_slot) - offsetof(kgl::Vertice, tex_id)) / sizeof(float));
-    vbl.Push<GLfloat>((sizeof(kgl::Vertice) - offsetof(kgl::Vertice, tex_slot)) / sizeof(float));
+    // kgl::Shader shader("res/shaders/shader.hlsl");
+    // shader.Compile();
 
-    kgl::VertexArray va;
-    va.Add(vb, vbl);
+    // line
+    kgl::Line xax(Eigen::Vector3f(0, 0, 0), Eigen::Vector3f(1, 0, 0));
+    kgl::Line yax(Eigen::Vector3f(0, 0, 0), Eigen::Vector3f(0, 1, 0));
+    kgl::Line zax(Eigen::Vector3f(0, 0, 0), Eigen::Vector3f(0, 0, 1));
 
-    kgl::Shader shader("res/shaders/shader.hlsl");
-    shader.Compile();
+    xax.SetColor({1, 0, 0, 1});
+    yax.SetColor({0, 1, 0, 1});
+    zax.SetColor({0, 0, 1, 1});
 
-    kgl::Texture texture("res/tex.png");
-    texture.Bind(0);
-    // shader.SetUniform<int>(1, GL_INT, "u_Texture", std::vector<int>({0}));
+    kgl::LineBuffer<kgl::Vertice> line_buffer;
+    line_buffer.Add(&xax);
+    line_buffer.Add(&yax);
+    line_buffer.Add(&zax);
+    line_buffer.Attach();
 
-    va.Unbind();
-    vb.Unbind();
-    ib.Unbind();
+    kgl::Shader line_shader("res/shaders/shader_line.hlsl");
+    line_shader.Compile();
+
 
 
     /* Loop until the user closes the window */
     GLfloat r = 0.0;
-    GLfloat inc = 0.001;
+    GLfloat inc = 0.1;
     while (!render->Closed())
     {
         /* Render here */
         render->Clear();
-
-        shader.Bind();
-        shader.FloatVector("u_Color", {sinf(r)/2.0f+0.5f, 0.2, 0.8, 1.0});
-
-        Eigen::Matrix4f mvp;
-        mvp = RotateX(r);
-        // float d = (sinf(r)+1.f)*5.f;
+        
+        Eigen::Matrix4f model, view, proj;
+        model = RotateX(r);
         float d = 10;
-        mvp = ViewMatrix(Eigen::Vector3f(0, 0, d), Eigen::Vector3f(0, 1, d), Eigen::Vector3f(0, 0, -1)) * mvp;
-        mvp = ProjectionMatrix(0.1, 20, 3.14f/4, 640.f/480.f) * mvp;
-        // mvp = OthogonalMatrix(-640.f/480.f, 640.f/480.f, -2.f, 0.f, -1.f, 1.f) * mvp;
-        shader.Matrix4f("mvp", mvp);
+        view = ViewMatrix(Eigen::Vector3f(0, 0, d), Eigen::Vector3f(0, 1, d), Eigen::Vector3f(0, 0, -1));
+        proj = ProjectionMatrix(0.1, 20, 3.14f/4, 640.f/480.f);
+        // proj = OthogonalMatrix(-2*640.f/480.f, 2*640.f/480.f, -2.f, 2.f, -2.f, 2.f);
 
-        render->Draw(va, ib, shader);
+        // shader.Bind();
+        // shader.Matrix4f("mv", view * model);
+        // shader.Matrix4f("proj", proj);
+        // render->Draw(triangle_buffer, shader);
+
+        line_shader.Bind();
+        line_shader.Matrix4f("mv", view * model);
+        line_shader.Matrix4f("proj", proj);
+        render->Draw(line_buffer, line_shader);
+
         r += inc;
 
+        // updata draww
         render->Spin();
     }
 

@@ -1,22 +1,28 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
   )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/tungkw/code/opengl_l/main.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/main.cpp.o"
+  "/home/tungkw/code/opengl_l/src/IndexBuffer.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/src/IndexBuffer.cpp.o"
+  "/home/tungkw/code/opengl_l/src/Logger.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/src/Logger.cpp.o"
+  "/home/tungkw/code/opengl_l/src/Shader.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/src/Shader.cpp.o"
+  "/home/tungkw/code/opengl_l/src/Texture.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/src/Texture.cpp.o"
+  "/home/tungkw/code/opengl_l/src/VertexArray.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/src/VertexArray.cpp.o"
+  "/home/tungkw/code/opengl_l/src/VertexBuffer.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/src/VertexBuffer.cpp.o"
+  "/home/tungkw/code/opengl_l/src/VertexBufferLayout.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/src/VertexBufferLayout.cpp.o"
+  "/home/tungkw/code/opengl_l/utils/stb_image/stb_image.cpp" "/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/tungkw/Documents/code/opengl_l/IndexBuffer.cpp" "CMakeFiles/main.dir/IndexBuffer.cpp.obj" "gcc" "CMakeFiles/main.dir/IndexBuffer.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/Logger.cpp" "CMakeFiles/main.dir/Logger.cpp.obj" "gcc" "CMakeFiles/main.dir/Logger.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/Shader.cpp" "CMakeFiles/main.dir/Shader.cpp.obj" "gcc" "CMakeFiles/main.dir/Shader.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/Texture.cpp" "CMakeFiles/main.dir/Texture.cpp.obj" "gcc" "CMakeFiles/main.dir/Texture.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/VertexArray.cpp" "CMakeFiles/main.dir/VertexArray.cpp.obj" "gcc" "CMakeFiles/main.dir/VertexArray.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/VertexBuffer.cpp" "CMakeFiles/main.dir/VertexBuffer.cpp.obj" "gcc" "CMakeFiles/main.dir/VertexBuffer.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/VertexBufferLayout.cpp" "CMakeFiles/main.dir/VertexBufferLayout.cpp.obj" "gcc" "CMakeFiles/main.dir/VertexBufferLayout.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/main.cpp" "CMakeFiles/main.dir/main.cpp.obj" "gcc" "CMakeFiles/main.dir/main.cpp.obj.d"
-  "C:/Users/tungkw/Documents/code/opengl_l/utils/stb_image/stb_image.cpp" "CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.obj" "gcc" "CMakeFiles/main.dir/utils/stb_image/stb_image.cpp.obj.d"
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  ".././dep/glew/include"
+  ".././dep/glfw/include"
+  ".././utils/stb_image"
+  ".././dep/eigen"
+  ".././inc"
   )
 
 # Targets to which this target links.

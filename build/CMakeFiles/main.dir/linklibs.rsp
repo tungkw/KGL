@@ -1,1 +1,0 @@
-  -LC:/Users/tungkw/Documents/code/opengl_l/./dep/glew/lib/Release/x64  -LC:/Users/tungkw/Documents/code/opengl_l/./dep/glfw/lib-mingw-w64  -lglew32s -lglfw3 -lOpengl32 -lGdi32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
