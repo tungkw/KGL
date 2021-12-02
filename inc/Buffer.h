@@ -11,35 +11,41 @@ namespace kgl
 {
 
 
+#define VERTEX_BUFFER_MAX_SIZE  10000
+#define INDEX_BUFFER_MAX_SIZE   10000
+
 
 template<typename T>
 class Buffer
 {
 public:
     unsigned int count;
+    unsigned int num_vertice_per_primitive;
     kgl::VertexBuffer *vb;
     kgl::IndexBuffer *ib;
     kgl::VertexArray *va;
 
 public:
-    Buffer()
+    Buffer(unsigned int num_vertice_per_primitive)
     {
         count = 0;
-        vb = new VertexBuffer(sizeof(T) * 1000);
+        this->num_vertice_per_primitive = num_vertice_per_primitive;
+        vb = new VertexBuffer(sizeof(T) * VERTEX_BUFFER_MAX_SIZE);
         va = new VertexArray();
         va->Add(*vb, T::GetLayout());
+
+        ib = new IndexBuffer(num_vertice_per_primitive * INDEX_BUFFER_MAX_SIZE);
     }
 
     ~Buffer()
     {
         delete vb;
         delete va;
+        delete ib;
     }
 
     void Attach()
     {
-        vb->Bind();
-        ib->Bind();
         vb->Attach();
         ib->Attach();
     }
@@ -55,7 +61,19 @@ public:
         return ib->GetCount();
     }
 
-    virtual void Add(Object<T>* obj) = 0;
+    void Clear()
+    {
+        vb->Clear();
+        ib->Clear();
+        this->count = 0;
+    }
+
+    void Add(Object<T>* obj) 
+    {
+        this->vb->Add(obj->GetVertexData(), sizeof(T) * obj->GetVertexNum());
+        this->ib->Add((unsigned int *)obj->GetPrimitivesData(), this->num_vertice_per_primitive * obj->GetPrimitivesNum(), this->count);
+        this->count += obj->GetVertexNum();
+    }
 };
 
 
@@ -65,20 +83,7 @@ class TriangleBuffer
     : public Buffer<T>
 {
 public:
-    TriangleBuffer(){
-        this->ib = new IndexBuffer(3 * 1000);
-    }
-
-    ~TriangleBuffer(){
-        delete this->ib;
-    }
-
-    virtual void Add(Object<T>* obj) 
-    {
-        this->vb->Add(obj->vertex, sizeof(T) * obj->num_vertex);
-        this->ib->Add(obj->primitives, 3 * obj->num_primitives, this->count);
-        this->count += obj->num_vertex;
-    }
+    TriangleBuffer() : Buffer<T>(3) {}
 };
 
 
@@ -87,20 +92,7 @@ class LineBuffer
     : public Buffer<T>
 {
 public:
-    LineBuffer(){
-        this->ib = new IndexBuffer(2 * 1000);
-    }
-
-    ~LineBuffer(){
-        delete this->ib;
-    }
-
-    virtual void Add(Object<T>* obj)
-    {
-        this->vb->Add(obj->vertex, sizeof(T) * obj->num_vertex);
-        this->ib->Add(obj->primitives, 2 * obj->num_primitives, this->count);
-        this->count += obj->num_vertex;
-    }
+    LineBuffer(): Buffer<T>(2) {}
 };
 
 

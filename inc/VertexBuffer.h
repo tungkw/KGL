@@ -10,15 +10,17 @@ class VertexBuffer{
 private:
     unsigned int m_id;
     char * buffer;
-    int size;
+    unsigned int size;
+    unsigned int capacity;
 public:
     VertexBuffer(unsigned int max_size);
     ~VertexBuffer();
     void Add(const void *data, unsigned int size);
+    void Clear();
     void Attach();
     void Bind();
     void Unbind();
-    int GetSize() const { return  size; }
+    unsigned int GetSize() const { return  size; }
 };
     
 } // namespace kgl

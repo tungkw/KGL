@@ -36,8 +36,9 @@ Eigen::Matrix4f RotateY(float theta)
 
 Eigen::Matrix4f ViewMatrix(Eigen::Vector3f pos, Eigen::Vector3f up, Eigen::Vector3f target)
 {
-    Eigen::Vector3f z = (target-up).normalized();
+    Eigen::Vector3f z = (target-pos).normalized();
     Eigen::Vector3f y = (up - pos).normalized();
+    y = y - z * z.dot(y);
     Eigen::Vector3f x = y.cross(z).normalized();
     Eigen::Matrix4f trans {
         {1.f, 0.f, 0.f, -pos(0)},

@@ -1,40 +1,37 @@
 #ifndef __KGL_LINE_H
 #define __KGL_LINE_H
 #include "Object.h"
+#include "Vertice.h"
 
 
 namespace kgl
 {
-    
+
+
+
 class Line
     : public Object<Vertice>
 {
 public:
-    Line(Eigen::Vector3f start_pos, Eigen::Vector3f end_pos);
-    ~Line();
+    Line(Eigen::Vector3f start, Eigen::Vector3f end)
+    {
+        num_vertex = 2;
+        num_primitives = 1;
+
+        kgl::Vertice vertice;
+        Eigen::Vector4f color(0.7f, 0.7f, 0.7f, 1.0f);
+    
+        vertice.pos = start;
+        vertice.color = color;
+        vertex.push_back(vertice);
+
+        vertice.pos = end;
+        vertex.push_back(vertice);
+
+        primitives.push_back(0);
+        primitives.push_back(1);
+    }
 };
-
-Line::Line(Eigen::Vector3f start_pos, Eigen::Vector3f end_pos)
-{
-    num_vertex = 2;
-    num_primitives = 1;
-    vertex = new Vertice[num_vertex];
-    primitives = new unsigned int[2*num_primitives];
-
-    SetColor({0.7f, 0.7f, 0.7f, 0.7f});
-
-    vertex[0].pos = start_pos;
-    vertex[1].pos = end_pos;
-
-    primitives[0] = 0;
-    primitives[1] = 1;
-}
-
-Line::~Line()
-{
-    delete[] vertex;
-    delete[] primitives;
-}
 
 }
 

@@ -1,41 +1,33 @@
 cmake_minimum_required(VERSION 3.14)
-# COMPILE_FLAGS(-std=c++11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+set( CMAKE_CXX_STANDARD 17 )
 project(GL)
 
 set(EXECUTABLE_OUTPUT_PATH ./..)
 
 include_directories(
+    ./inc
     ./dep/glew/include
     ./dep/glfw/include
     ./utils/stb_image
     ./dep/eigen
 )
-link_directories(
-    # ./dep/glew/lib/Release/x64/
-    # ./dep/glfw/lib-mingw-w64/
-
-    ./dep/glew/lib/Release/ubuntu18/
-    ./dep/glfw/ubuntu18/
-)
 
 
+IF(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    message("build in Linux")
+    link_directories(
+        ./dep/glew/lib/Release/ubuntu18/
+        ./dep/glfw/ubuntu18/
+    )
+ELSEIF(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    message("build in Windows")
+    link_directories(
+        ./dep/glew/lib/Release/Win32/
+        ./dep/glfw/lib-mingw-w64/Win32/
+    )
+ENDIF()
 
-include_directories(./inc)
 
-link_libraries(
-    # glew32s
-    # glfw3
-    # Opengl32
-    # Gdi32
-
-    GLEW
-    glfw3
-    GL
-    -lpthread
-    -ldl
-    # Gdi32
-)
 add_executable(main 
     main.cpp 
     
@@ -49,3 +41,23 @@ add_executable(main
     
     ./utils/stb_image/stb_image.cpp
 )
+
+IF(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    target_link_libraries(main
+        GLEW
+        glfw3
+        GL
+        -lpthread
+        -ldl
+    )
+ELSEIF(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    target_link_libraries(main
+        glew32s
+        glfw3
+        Opengl32
+        Gdi32
+    )
+ENDIF()
+
+
+add_executable(test test.cpp)
