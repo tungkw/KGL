@@ -1,3 +1,0 @@
-/home/tungkw/code/opengl_l/build/CMakeFiles/rebuild_cache.dir
-/home/tungkw/code/opengl_l/build/CMakeFiles/main.dir
-/home/tungkw/code/opengl_l/build/CMakeFiles/edit_cache.dir
