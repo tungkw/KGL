@@ -1,9 +1,8 @@
 #ifndef __KGL_VERTEX_BUFFER_LAYOUT_H
 #define __KGL_VERTEX_BUFFER_LAYOUT_H
-
+#include <vector>
 #include "Header.h"
 #include "Logger.h"
-#include <vector>
 
 namespace kgl
 {

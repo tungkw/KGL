@@ -6,6 +6,7 @@
 #include <malloc.h>
 #include <vector>
 #include <initializer_list>
+#include "Header.h"
 #include "Logger.h"
 
 namespace kgl

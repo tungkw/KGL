@@ -1,5 +1,11 @@
+#ifndef __KGL_TRANSFORMATION_H
+#define __KGL_TRANSFORMATION_H
+
 #include <Eigen/Dense>
 
+namespace kgl{
+
+#define EPSILON 1e-6
 
 Eigen::Matrix4f RotateZ(float theta)
 {
@@ -34,6 +40,71 @@ Eigen::Matrix4f RotateY(float theta)
     return rmat;
 }
 
+Eigen::Matrix3f Hat(Eigen::Vector3f omega)
+{
+    Eigen::Matrix3f mat;
+    mat <<  0, -omega(2), omega(1),
+            omega(2), 0, -omega(0),
+            -omega(1), omega(0), 0;
+    return mat;
+}
+
+/*
+Qaternion
+*/
+Eigen::Vector4f QuaternionFromMatrix(Eigen::Matrix3f mat)
+{
+    Eigen::Vector4f q;
+    float trace = mat(0,0) + mat(1,1) + mat(2,2);
+    float theta = acosf((trace-1.f)/(2.f));
+    if (fabs(theta) < EPSILON)
+    {
+        theta = 0;
+        q = {0, 0, 0, 1};
+    }
+    else
+    {
+        Eigen::Vector3f omega = Eigen::Vector3f(mat(2,1)-mat(1,2), mat(0,2)-mat(2,0), mat(1,0)-mat(0,1)) / (2.f*sinf(theta));
+        q.block<3, 1>(0,0) = sinf(theta/2.f) * omega.normalized();
+        q(3) = cosf(theta/2.f);
+    }
+    return q.normalized();
+}
+
+Eigen::Matrix3f MatrixFromQuaternion(Eigen::Vector4f q)
+{
+    Eigen::Matrix3f mat, omega_hat;
+    Eigen::Vector3f omega;
+    float theta;
+
+    theta = 2.0f * acosf(q(3));
+    if (fabs(theta) < EPSILON)
+    {
+        return Eigen::Matrix3f::Identity();
+    }
+    else
+    {
+        omega = q.block<3, 1>(0, 0) / sinf(theta/2.0f);
+        omega_hat = Hat(omega);
+        mat = Eigen::Matrix3f::Identity() + omega_hat * sinf(theta) + omega_hat * omega_hat * (1-cosf(theta));
+        return mat;
+    }
+}
+
+Eigen::Vector4f QuaternionMul(Eigen::Vector4f q1, Eigen::Vector4f q2)
+{
+    Eigen::Vector4f q;
+    q.block<3, 1>(0,0) = q1.block<3, 1>(0,0) * q2(3) + 
+                         q2.block<3, 1>(0,0) * q1(3) + 
+                         q1.block<3, 1>(0,0).cross(q2.block<3, 1>(0,0));
+    q(3) = q1(3)*q2(3) - q1.block<3, 1>(0,0).transpose().dot(q2.block<3, 1>(0,0));
+    return q.normalized();
+}
+
+
+/*
+projection
+*/
 Eigen::Matrix4f ViewMatrix(Eigen::Vector3f pos, Eigen::Vector3f up, Eigen::Vector3f target)
 {
     Eigen::Vector3f z = (target-pos).normalized();
@@ -86,3 +157,8 @@ Eigen::Matrix4f ProjectionMatrix(float near, float far, float fov, float aspect)
     proj = OthogonalMatrix(xu, -xu, -yu, yu, near, far) * proj;
     return proj;
 }
+
+
+} // namespace kgl
+
+#endif

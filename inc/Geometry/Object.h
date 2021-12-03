@@ -1,7 +1,8 @@
 #ifndef __KGL_OBJECT_H
 #define __KGL_OBJECT_H
-#include <Eigen/Dense>
 #include <vector>
+#include "Eigen/Dense"
+#include "Transformation.h"
 
 namespace kgl
 {
@@ -16,28 +17,40 @@ protected:
     int num_vertex;
     int num_primitives;
     Eigen::Matrix4f pose;
+    Eigen::Vector4f quaternion;
 
 public:
 
     Object(/* args */){ pose = Eigen::Matrix4f::Identity(); }
 
-    void SetPose(Eigen::Matrix4f pose)
+    void SetPose(Eigen::Matrix4f pose_)
     {
+        this->quaternion = QuaternionFromMatrix(pose_.block<3, 3>(0, 0));
+        Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
+        new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
+        new_pose.block<3, 1>(0, 3) = pose_.block<3, 1>(0, 3);
         for (int i = 0 ; i < num_vertex; i++)
         {
             vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
-            vertex[i].pos = pose.block<3, 3>(0, 0) * vertex[i].pos + pose.block<3, 1>(0, 3);
+            vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
         }
-        this->pose = pose;
+        this->pose = new_pose;
     }
     
     void Translation(Eigen::Matrix4f trans)
     {
+        Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
+        this->quaternion = QuaternionMul(this->quaternion, q_r);
+        Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
+        new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
+        new_pose.block<3, 1>(0, 3) = trans.block<3,3>(0,0) * this->pose.block<3, 1>(0, 3) + trans.block<3, 1>(0, 3);
         for (int i = 0 ; i < num_vertex; i++)
         {
+            // vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
+            // vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
             vertex[i].pos = trans.block<3, 3>(0, 0) * vertex[i].pos + trans.block<3, 1>(0, 3);
         }
-        this->pose = trans * pose;
+        this->pose = new_pose;
     }
 
     void SetColor(Eigen::Vector4f color)

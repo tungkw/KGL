@@ -1,6 +1,5 @@
 #ifndef __KGL_VERTEX_ARRAY_H
 #define __KGL_VERTEX_ARRAY_H
-
 #include "Header.h"
 #include "Logger.h"
 #include "VertexBuffer.h"

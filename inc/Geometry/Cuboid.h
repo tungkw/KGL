@@ -98,10 +98,15 @@ Cuboid::Cuboid(float x, float y, float z)
     num_vertex = 24;
     num_primitives = 12;
 
+    Eigen::Matrix3f scale;
+    scale << x, 0, 0,
+             0, y, 0,
+             0, 0, z;
+
     kgl::NormalVertice vertice;
     for(int i = 0 ; i < 24; i++)
     {
-        vertice.pos = positions[i];
+        vertice.pos = scale * positions[i];
         vertice.color = {0.7f, 0.7f, 0.7f, 1.0f};
         vertice.normal = normals[i];
         vertex.push_back(vertice);

@@ -2,6 +2,7 @@
 #define __KGL_TEXTURE_H
 #include <string>
 #include "stb_image.h"
+#include "Header.h"
 #include "Logger.h"
 
 namespace kgl

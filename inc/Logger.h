@@ -1,8 +1,9 @@
 #ifndef __KGL_LOGGER_H
 #define __KGL_LOGGER_H
-#include "Header.h"
+
 #include <iostream>
 #include <cstdlib>
+#include "Header.h"
 
 namespace kgl
 {
