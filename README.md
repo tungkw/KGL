@@ -1,18 +1,25 @@
-# dependencies
+# KGL
 
-## GLFW
+OpenGL  render, with basic objects, buffer contorllers and mvp shaders.
+
+# Dependencies
+
+- GLFW
+
 for window context control
 
-## GLEW
+- GLEW
+
 for api definition finding
 
-## Eigen
-3.4.0
+- Eigen 3.4.0
 
-# build
+# Build
 
+- c++17 for Eigen align problem
+
+# Test
 test with
 - [ ] mingw-64w (x64)
 - [ ] mingw-64w (86)
-
-c++17 for Eigen align problem
+- [ ] ubuntu18
