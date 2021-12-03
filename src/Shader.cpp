@@ -73,7 +73,7 @@ unsigned int Shader::CreateShader(const std::string &vertex_shader, const std::s
 
 void Shader::Compile()
 {
-    sn = ParseShader(std::string("res/shaders/shader.hlsl"));
+    sn = ParseShader(this->file_name);
     shader_id = CreateShader(sn.vertex_shader, sn.fragment_shader);
 }
 

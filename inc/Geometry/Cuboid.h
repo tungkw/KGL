@@ -91,6 +91,8 @@ class Cuboid
 {
 public:
     Cuboid(float x=1, float y=1, float z=1);
+    void SetPose(Eigen::Matrix4f pose_);
+    void Transfrom(Eigen::Matrix4f trans);
 };
 
 Cuboid::Cuboid(float x, float y, float z)
@@ -118,6 +120,40 @@ Cuboid::Cuboid(float x, float y, float z)
         primitives.push_back(faces[i*3 + 1]);
         primitives.push_back(faces[i*3 + 2]);
     }
+}
+
+
+
+void Cuboid::SetPose(Eigen::Matrix4f pose_)
+{
+    this->quaternion = QuaternionFromMatrix(pose_.block<3, 3>(0, 0));
+    Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
+    new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
+    new_pose.block<3, 1>(0, 3) = pose_.block<3, 1>(0, 3);
+    for (int i = 0 ; i < num_vertex; i++)
+    {
+        vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
+        vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
+        vertex[i].normal = new_pose.block<3, 3>(0, 0) * this->pose.block<3, 3>(0, 0).transpose() * vertex[i].normal;
+    }
+    this->pose = new_pose;
+}
+
+void Cuboid::Transfrom(Eigen::Matrix4f trans)
+{
+    Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
+    this->quaternion = QuaternionMul(this->quaternion, q_r);
+    Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
+    new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
+    new_pose.block<3, 1>(0, 3) = trans.block<3,3>(0,0) * this->pose.block<3, 1>(0, 3) + trans.block<3, 1>(0, 3);
+    for (int i = 0 ; i < num_vertex; i++)
+    {
+        // vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
+        // vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
+        vertex[i].pos = trans.block<3, 3>(0, 0) * vertex[i].pos + trans.block<3, 1>(0, 3);
+        vertex[i].normal = trans.block<3, 3>(0, 0) * vertex[i].normal;
+    }
+    this->pose = new_pose;
 }
 
 

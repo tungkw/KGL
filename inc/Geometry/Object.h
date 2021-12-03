@@ -3,6 +3,7 @@
 #include <vector>
 #include "Eigen/Dense"
 #include "Transformation.h"
+#include "Geometry/Vertice.h"
 
 namespace kgl
 {
@@ -37,7 +38,7 @@ public:
         this->pose = new_pose;
     }
     
-    void Translation(Eigen::Matrix4f trans)
+    void Transfrom(Eigen::Matrix4f trans)
     {
         Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
         this->quaternion = QuaternionMul(this->quaternion, q_r);

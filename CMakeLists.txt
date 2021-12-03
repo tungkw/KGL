@@ -3,14 +3,17 @@ set( CMAKE_CXX_STANDARD 17 )
 project(KGL)
 
 
+
 add_library( ${PROJECT_NAME}
-    src/Logger.cpp 
-    src/VertexBuffer.cpp 
-    src/IndexBuffer.cpp
-    src/VertexArray.cpp
-    src/VertexBufferLayout.cpp
-    src/Shader.cpp
-    src/Texture.cpp
+    ./src/Logger.cpp 
+    ./src/VertexBuffer.cpp 
+    ./src/IndexBuffer.cpp
+    ./src/VertexArray.cpp
+    ./src/VertexBufferLayout.cpp
+    ./src/Shader.cpp
+    ./src/Texture.cpp
+    ./src/Transformation.cpp
+    ./src/Render.cpp
     ./utils/stb_image/stb_image.cpp
 )
 
@@ -49,7 +52,7 @@ ELSEIF(CMAKE_SYSTEM_NAME MATCHES "Windows")
 ENDIF()
 
 
-add_executable(example
-    example/example.cpp 
-)
-target_link_libraries(example KGL)
+# add_executable(example
+#     example/example.cpp 
+# )
+# target_link_libraries(example KGL)
