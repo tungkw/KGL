@@ -92,7 +92,7 @@ class Cuboid
 public:
     Cuboid(float x=1, float y=1, float z=1);
     void SetPose(Eigen::Matrix4f pose_);
-    void Transfrom(Eigen::Matrix4f trans);
+    void Transform(Eigen::Matrix4f trans);
 };
 
 Cuboid::Cuboid(float x, float y, float z)
@@ -139,7 +139,7 @@ void Cuboid::SetPose(Eigen::Matrix4f pose_)
     this->pose = new_pose;
 }
 
-void Cuboid::Transfrom(Eigen::Matrix4f trans)
+void Cuboid::Transform(Eigen::Matrix4f trans)
 {
     Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
     this->quaternion = QuaternionMul(this->quaternion, q_r);

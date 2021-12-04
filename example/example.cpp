@@ -12,12 +12,53 @@
     // texture.Bind(0);
     // shader.SetUniform<int>(1, GL_INT, "u_Texture", std::vector<int>({0}));
 
+Eigen::Matrix4f model, view, proj;
+
+
+void scroll_cb(GLFWwindow *context, double x_offset, double y_offset)
+{
+    view(2, 3) -= y_offset;
+}
+
+// void mouse_btn_cb(GLFWwindow *context, int button, int action, int mods)
+// {
+//     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+//         popup_menu();
+// }
+
+void cursor_pos_cb(GLFWwindow *context, double x_pos, double y_pos)
+{
+    static double x_pos_pre = -1;
+    static double y_pos_pre = -1;
+    if (x_pos_pre > 0)
+    {
+        int left_state = glfwGetMouseButton(context, GLFW_MOUSE_BUTTON_LEFT);
+        int right_state = glfwGetMouseButton(context, GLFW_MOUSE_BUTTON_RIGHT);
+        int ctrl_state = glfwGetKey(context, GLFW_KEY_LEFT_CONTROL);
+        if (left_state == GLFW_PRESS)
+        {
+            if (ctrl_state == GLFW_PRESS)
+                view = kgl::RotateZ((y_pos-y_pos_pre)/100.f) * view;
+            else
+                view = kgl::RotateX((y_pos-y_pos_pre)/100.f) * kgl::RotateY(-(x_pos-x_pos_pre)/100.f) * view;
+        }
+        else if (right_state == GLFW_PRESS)
+        {
+            view(0, 3) += -(x_pos-x_pos_pre)/100.f;
+            view(1, 3) += -(y_pos-y_pos_pre)/100.f;
+        }
+    }
+    x_pos_pre = x_pos;
+    y_pos_pre = y_pos;
+}
+
 int main(void)
 {
 
     kgl::Render* render = new kgl::Render;
     render->Open(640, 480, "Hello World");
-
+    render->SetScrollCallback(scroll_cb);
+    render->SetCursorPosCallback(cursor_pos_cb);
 
     // triangles
     kgl::TriangleBuffer<kgl::NormalVertice> triangle_buffer;
@@ -53,11 +94,11 @@ int main(void)
 
 
 
-    Eigen::Matrix4f model, view, proj;
+    // Eigen::Matrix4f model, view, proj;
     // model = RotateX(r);
     model = Eigen::Matrix4f::Identity();
     view = kgl::ViewMatrix(Eigen::Vector3f(5, 5, 5), Eigen::Vector3f(0, 0, 10), Eigen::Vector3f(0, 0, 0));
-    proj = kgl::ProjectionMatrix(0.1, 20, 3.14f/4, 640.f/480.f);
+    proj = kgl::ProjectionMatrix(0.1, 100, 3.14f/4, 640.f/480.f);
     // proj = OthogonalMatrix(-2*640.f/480.f, 2*640.f/480.f, -2.f, 2.f, -2.f, 2.f);
 
     /* Loop until the user closes the window */
@@ -71,9 +112,9 @@ int main(void)
 
 
         // std::cout << obj.GetPose().block<3,3>(0,0).determinant() << std::endl;
-        // Eigen::Matrix4f N = T * obj.GetPose();
+        Eigen::Matrix4f N = T * obj.GetPose();
         // obj.SetPose(N);
-        obj.Translation(T);
+        obj.Transform(T);
         triangle_buffer.Clear();
         triangle_buffer.Add(&obj);
         triangle_buffer.Add(&obj2);
@@ -82,6 +123,7 @@ int main(void)
         shader.Bind();
         shader.Matrix4f("mv", view * model);
         shader.Matrix4f("proj", proj);
+        shader.Vectorf("light", {5.f, 5.f, 5.f});
         render->Draw(triangle_buffer, shader);
 
 

@@ -51,8 +51,10 @@ ELSEIF(CMAKE_SYSTEM_NAME MATCHES "Windows")
     )
 ENDIF()
 
-
-# add_executable(example
-#     example/example.cpp 
-# )
-# target_link_libraries(example KGL)
+IF(KGL_EXAMPLE)
+    message("KGL_EXAMPLE defined")
+    add_executable(example
+        example/example.cpp 
+    )
+    target_link_libraries(example KGL)
+ENDIF()

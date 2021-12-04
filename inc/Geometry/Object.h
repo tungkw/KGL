@@ -38,7 +38,7 @@ public:
         this->pose = new_pose;
     }
     
-    void Transfrom(Eigen::Matrix4f trans)
+    void Transform(Eigen::Matrix4f trans)
     {
         Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
         this->quaternion = QuaternionMul(this->quaternion, q_r);
