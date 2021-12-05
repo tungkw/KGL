@@ -8,6 +8,7 @@ namespace kgl
 
 struct Vertice
 {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     Eigen::Vector3f pos;
     Eigen::Vector4f color;
     static VertexBufferLayout GetLayout()

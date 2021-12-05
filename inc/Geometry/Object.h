@@ -8,8 +8,23 @@
 namespace kgl
 {
 
+class ObjectBase
+{
+public:
+    virtual void SetPose(Eigen::Matrix4f pose_) = 0;
+    virtual void Transform(Eigen::Matrix4f trans) = 0;
+    virtual void SetColor(Eigen::Vector4f color) = 0;
+    virtual void* GetVertexData() = 0;
+    virtual void* GetPrimitivesData() = 0;
+    virtual int GetVertexNum() const = 0;
+    virtual int GetPrimitivesNum() const = 0;
+    virtual Eigen::Matrix4f GetPose() const = 0;
+    
+};
+
 template<typename T>
 class Object
+    : public kgl::ObjectBase
 {
 protected:
     /* data */
@@ -21,10 +36,17 @@ protected:
     Eigen::Vector4f quaternion;
 
 public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
-    Object(/* args */){ pose = Eigen::Matrix4f::Identity(); }
+    Object(/* args */)
+    { 
+        pose = Eigen::Matrix4f::Identity();
+        quaternion = Eigen::Vector4f(0, 0, 0, 1);
+        num_vertex = 0;
+        num_primitives = 0; 
+    }
 
-    void SetPose(Eigen::Matrix4f pose_)
+    virtual void SetPose(Eigen::Matrix4f pose_)
     {
         this->quaternion = QuaternionFromMatrix(pose_.block<3, 3>(0, 0));
         Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
@@ -38,7 +60,7 @@ public:
         this->pose = new_pose;
     }
     
-    void Transform(Eigen::Matrix4f trans)
+    virtual void Transform(Eigen::Matrix4f trans)
     {
         Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
         this->quaternion = QuaternionMul(this->quaternion, q_r);
@@ -47,25 +69,23 @@ public:
         new_pose.block<3, 1>(0, 3) = trans.block<3,3>(0,0) * this->pose.block<3, 1>(0, 3) + trans.block<3, 1>(0, 3);
         for (int i = 0 ; i < num_vertex; i++)
         {
-            // vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
-            // vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
-            vertex[i].pos = trans.block<3, 3>(0, 0) * vertex[i].pos + trans.block<3, 1>(0, 3);
+            vertex[i].pos = MatrixFromQuaternion(q_r) * vertex[i].pos + trans.block<3, 1>(0, 3);
         }
         this->pose = new_pose;
     }
 
-    void SetColor(Eigen::Vector4f color)
+    virtual void SetColor(Eigen::Vector4f color)
     {
         for(int i = 0 ; i < num_vertex; i++)
             vertex[i].color = color;
     }
 
-    void* GetVertexData() { return &vertex[0]; }
-    void* GetPrimitivesData() { return &primitives[0]; }
+    virtual void* GetVertexData() { return &vertex[0]; }
+    virtual void* GetPrimitivesData() { return &primitives[0]; }
 
-    int GetVertexNum() const { return num_vertex; }
-    int GetPrimitivesNum() const { return num_primitives; }
-    Eigen::Matrix4f GetPose() const { return pose; }
+    virtual int GetVertexNum() const { return num_vertex; }
+    virtual int GetPrimitivesNum() const { return num_primitives; }
+    virtual Eigen::Matrix4f GetPose() const { return pose; }
 };
 
 

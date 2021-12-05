@@ -61,10 +61,11 @@ public:
         this->count = 0;
     }
 
-    void Add(Object<T>* obj) 
+    void Add(kgl::ObjectBase* obj) 
     {
+        if (obj == nullptr) return;
         this->vb->Add(obj->GetVertexData(), sizeof(T) * obj->GetVertexNum());
-        this->ib->Add((unsigned int *)obj->GetPrimitivesData(), this->num_vertice_per_primitive * obj->GetPrimitivesNum(), this->count);
+        this->ib->Add((unsigned int *)(obj->GetPrimitivesData()), this->num_vertice_per_primitive * obj->GetPrimitivesNum(), this->count);
         this->count += obj->GetVertexNum();
     }
 

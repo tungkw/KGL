@@ -1,6 +1,7 @@
 #ifndef __KGL_CUBOID_H
 #define __KGL_CUBOID_H
 #include "Object.h"
+#include "Vertice.h"
 
 
 namespace kgl
@@ -86,8 +87,10 @@ unsigned int faces[] = {
     5+16, 2+16, 6+16,
 };
 
+
+
 class Cuboid
-    : public Object<NormalVertice>
+    : public kgl::Object<kgl::NormalVertice>
 {
 public:
     Cuboid(float x=1, float y=1, float z=1);
@@ -122,8 +125,6 @@ Cuboid::Cuboid(float x, float y, float z)
     }
 }
 
-
-
 void Cuboid::SetPose(Eigen::Matrix4f pose_)
 {
     this->quaternion = QuaternionFromMatrix(pose_.block<3, 3>(0, 0));
@@ -148,8 +149,6 @@ void Cuboid::Transform(Eigen::Matrix4f trans)
     new_pose.block<3, 1>(0, 3) = trans.block<3,3>(0,0) * this->pose.block<3, 1>(0, 3) + trans.block<3, 1>(0, 3);
     for (int i = 0 ; i < num_vertex; i++)
     {
-        // vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
-        // vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
         vertex[i].pos = trans.block<3, 3>(0, 0) * vertex[i].pos + trans.block<3, 1>(0, 3);
         vertex[i].normal = trans.block<3, 3>(0, 0) * vertex[i].normal;
     }

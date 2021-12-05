@@ -10,7 +10,7 @@ namespace kgl
 
 
 class Line
-    : public Object<Vertice>
+    : public kgl::Object<kgl::Vertice>
 {
 public:
     Line(Eigen::Vector3f start, Eigen::Vector3f end)
