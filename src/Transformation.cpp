@@ -1,4 +1,5 @@
 #include "Transformation.h"
+#include <iostream>
 
 namespace kgl{
 
@@ -59,8 +60,9 @@ Eigen::Vector4f QuaternionFromMatrix(Eigen::Matrix3f mat)
     Eigen::Vector4f q;
     float trace = mat(0,0) + mat(1,1) + mat(2,2);
     float theta = acosf((trace-1.f)/(2.f));
-    if (sinf(theta) < EPSILON)
+    if (fabs(sinf(theta)) < EPSILON)
     {
+        // std::cout << "QUATERNION 1" << std::endl << theta << std::endl;
         theta = 0.f;
         q = {0.f, 0.f, 0.f, 1.f};
     }
@@ -77,18 +79,19 @@ Eigen::Matrix3f MatrixFromQuaternion(Eigen::Vector4f q)
 {
     Eigen::Matrix3f mat, omega_hat;
     Eigen::Vector3f omega;
-    float theta;
+    float half_theta;
 
-    theta = 2.0f * acosf(q(3));
-    if (sinf(theta/2.0f) < EPSILON)
+    half_theta = acosf(q(3));
+    if (fabs(sinf(half_theta)) < EPSILON)
     {
+        // std::cout << "QUATERNION 2" << std::endl << half_theta << std::endl;
         return Eigen::Matrix3f::Identity();
     }
     else
     {
-        omega = q.block<3, 1>(0, 0) / sinf(theta/2.0f);
+        omega = q.block<3, 1>(0, 0) / sinf(half_theta);
         omega_hat = Hat(omega);
-        mat = Eigen::Matrix3f::Identity() + omega_hat * sinf(theta) + omega_hat * omega_hat * (1-cosf(theta));
+        mat = Eigen::Matrix3f::Identity() + omega_hat * sinf(half_theta*2.0f) + omega_hat * omega_hat * (1-cosf(half_theta*2.0f));
         return mat;
     }
 }
