@@ -35,6 +35,13 @@ Eigen::Matrix4f RotateY(float theta)
     return rmat;
 }
 
+Eigen::Matrix4f Translation(float x, float y, float z)
+{
+    Eigen::Matrix4f t = Eigen::Matrix4f::Identity();
+    t.block<3, 1>(0, 3) = Eigen::Vector3f(x, y, z);
+    return t;
+}
+
 Eigen::Matrix3f Hat(Eigen::Vector3f omega)
 {
     Eigen::Matrix3f mat;
@@ -52,10 +59,10 @@ Eigen::Vector4f QuaternionFromMatrix(Eigen::Matrix3f mat)
     Eigen::Vector4f q;
     float trace = mat(0,0) + mat(1,1) + mat(2,2);
     float theta = acosf((trace-1.f)/(2.f));
-    if (fabs(theta) < EPSILON)
+    if (sinf(theta) < EPSILON)
     {
-        theta = 0;
-        q = {0, 0, 0, 1};
+        theta = 0.f;
+        q = {0.f, 0.f, 0.f, 1.f};
     }
     else
     {
@@ -73,7 +80,7 @@ Eigen::Matrix3f MatrixFromQuaternion(Eigen::Vector4f q)
     float theta;
 
     theta = 2.0f * acosf(q(3));
-    if (fabs(theta) < EPSILON)
+    if (sinf(theta/2.0f) < EPSILON)
     {
         return Eigen::Matrix3f::Identity();
     }

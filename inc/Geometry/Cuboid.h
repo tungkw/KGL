@@ -94,8 +94,7 @@ class Cuboid
 {
 public:
     Cuboid(float x=1, float y=1, float z=1);
-    void SetPose(Eigen::Matrix4f pose_);
-    void Transform(Eigen::Matrix4f trans);
+    virtual void Rotation(Eigen::Matrix3f rmat);
 };
 
 Cuboid::Cuboid(float x, float y, float z)
@@ -125,34 +124,18 @@ Cuboid::Cuboid(float x, float y, float z)
     }
 }
 
-void Cuboid::SetPose(Eigen::Matrix4f pose_)
+void Cuboid::Rotation(Eigen::Matrix3f rmat)
 {
-    this->quaternion = QuaternionFromMatrix(pose_.block<3, 3>(0, 0));
-    Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
-    new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
-    new_pose.block<3, 1>(0, 3) = pose_.block<3, 1>(0, 3);
+    Eigen::Vector4f q_r = kgl::QuaternionFromMatrix(rmat);
+    rmat = kgl::MatrixFromQuaternion(q_r);
+    this->quaternion = kgl::QuaternionMul(q_r, kgl::QuaternionFromMatrix(this->pose.block<3, 3>(0, 0)));
     for (int i = 0 ; i < num_vertex; i++)
     {
-        vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
-        vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
-        vertex[i].normal = new_pose.block<3, 3>(0, 0) * this->pose.block<3, 3>(0, 0).transpose() * vertex[i].normal;
+        vertex[i].pos = rmat * vertex[i].pos;
+        vertex[i].normal = rmat * vertex[i].normal;
     }
-    this->pose = new_pose;
-}
-
-void Cuboid::Transform(Eigen::Matrix4f trans)
-{
-    Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
-    this->quaternion = QuaternionMul(this->quaternion, q_r);
-    Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
-    new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
-    new_pose.block<3, 1>(0, 3) = trans.block<3,3>(0,0) * this->pose.block<3, 1>(0, 3) + trans.block<3, 1>(0, 3);
-    for (int i = 0 ; i < num_vertex; i++)
-    {
-        vertex[i].pos = trans.block<3, 3>(0, 0) * vertex[i].pos + trans.block<3, 1>(0, 3);
-        vertex[i].normal = trans.block<3, 3>(0, 0) * vertex[i].normal;
-    }
-    this->pose = new_pose;
+    this->pose.block<3, 3>(0, 0) = kgl::MatrixFromQuaternion(this->quaternion);
+    this->pose.block<3, 1>(0, 3) = rmat * this->pose.block<3, 1>(0, 3);
 }
 
 

@@ -13,6 +13,8 @@ class ObjectBase
 public:
     virtual void SetPose(Eigen::Matrix4f pose_) = 0;
     virtual void Transform(Eigen::Matrix4f trans) = 0;
+    virtual void Rotation(Eigen::Matrix3f rmat) = 0;
+    virtual void Translation(Eigen::Vector3f tvec) = 0;
     virtual void SetColor(Eigen::Vector4f color) = 0;
     virtual void* GetVertexData() = 0;
     virtual void* GetPrimitivesData() = 0;
@@ -48,30 +50,39 @@ public:
 
     virtual void SetPose(Eigen::Matrix4f pose_)
     {
-        this->quaternion = QuaternionFromMatrix(pose_.block<3, 3>(0, 0));
-        Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
-        new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
-        new_pose.block<3, 1>(0, 3) = pose_.block<3, 1>(0, 3);
-        for (int i = 0 ; i < num_vertex; i++)
-        {
-            vertex[i].pos = this->pose.block<3, 3>(0, 0).transpose() * (vertex[i].pos - this->pose.block<3, 1>(0, 3));
-            vertex[i].pos = new_pose.block<3, 3>(0, 0) * vertex[i].pos + new_pose.block<3, 1>(0, 3);
-        }
-        this->pose = new_pose;
+        Eigen::Matrix4f pose = this->pose, pose_inv = Eigen::Matrix4f::Identity();
+        pose_inv.block<3, 3>(0, 0) = pose.block<3, 3>(0, 0).transpose();
+        pose_inv.block<3, 1>(0, 3) = - pose_inv.block<3, 3>(0, 0) * pose.block<3, 1>(0, 3);
+        Eigen::Matrix4f trans = pose_ * pose_inv;
+        this->Transform(trans);
     }
     
     virtual void Transform(Eigen::Matrix4f trans)
     {
-        Eigen::Vector4f q_r = QuaternionFromMatrix(trans.block<3,3>(0,0));
-        this->quaternion = QuaternionMul(this->quaternion, q_r);
-        Eigen::Matrix4f new_pose = Eigen::Matrix4f::Identity();
-        new_pose.block<3, 3>(0, 0) = MatrixFromQuaternion(this->quaternion);
-        new_pose.block<3, 1>(0, 3) = trans.block<3,3>(0,0) * this->pose.block<3, 1>(0, 3) + trans.block<3, 1>(0, 3);
+        this->Rotation(trans.block<3, 3>(0, 0));
+        this->Translation(trans.block<3, 1>(0, 3));
+    }
+
+    virtual void Rotation(Eigen::Matrix3f rmat)
+    {
+        Eigen::Vector4f q_r = kgl::QuaternionFromMatrix(rmat);
+        rmat = kgl::MatrixFromQuaternion(q_r);
+        this->quaternion = kgl::QuaternionMul(q_r, kgl::QuaternionFromMatrix(this->pose.block<3, 3>(0, 0)));
         for (int i = 0 ; i < num_vertex; i++)
         {
-            vertex[i].pos = MatrixFromQuaternion(q_r) * vertex[i].pos + trans.block<3, 1>(0, 3);
+            vertex[i].pos = rmat * vertex[i].pos;
         }
-        this->pose = new_pose;
+        this->pose.block<3, 3>(0, 0) = kgl::MatrixFromQuaternion(this->quaternion);
+        this->pose.block<3, 1>(0, 3) = rmat * this->pose.block<3, 1>(0, 3);
+    }
+
+    virtual void Translation(Eigen::Vector3f tvec)
+    {
+        this->pose.block<3, 1>(0, 3) += tvec;
+        for (int i = 0 ; i < num_vertex; i++)
+        {
+            vertex[i].pos += tvec;
+        }
     }
 
     virtual void SetColor(Eigen::Vector4f color)

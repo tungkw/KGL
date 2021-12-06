@@ -10,6 +10,7 @@ namespace kgl{
 Eigen::Matrix4f RotateZ(float theta);
 Eigen::Matrix4f RotateX(float theta);
 Eigen::Matrix4f RotateY(float theta);
+Eigen::Matrix4f Translation(float x, float y, float z);
 Eigen::Matrix3f Hat(Eigen::Vector3f omega);
 
 /*
