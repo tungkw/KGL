@@ -21,6 +21,7 @@ public:
     virtual int GetVertexNum() const = 0;
     virtual int GetPrimitivesNum() const = 0;
     virtual Eigen::Matrix4f GetPose() const = 0;
+    virtual Eigen::Vector4f GetQuaternion() const = 0;
     
 };
 
@@ -67,7 +68,7 @@ public:
     {
         Eigen::Vector4f q_r = kgl::QuaternionFromMatrix(rmat);
         rmat = kgl::MatrixFromQuaternion(q_r);
-        this->quaternion = kgl::QuaternionMul(q_r, kgl::QuaternionFromMatrix(this->pose.block<3, 3>(0, 0)));
+        this->quaternion = kgl::QuaternionMul(q_r, this->quaternion);
         for (int i = 0 ; i < num_vertex; i++)
         {
             vertex[i].pos = rmat * vertex[i].pos;
@@ -97,6 +98,7 @@ public:
     virtual int GetVertexNum() const { return num_vertex; }
     virtual int GetPrimitivesNum() const { return num_primitives; }
     virtual Eigen::Matrix4f GetPose() const { return pose; }
+    virtual Eigen::Vector4f GetQuaternion() const { return this->quaternion; }
 };
 
 

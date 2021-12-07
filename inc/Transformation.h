@@ -5,7 +5,7 @@
 
 namespace kgl{
 
-#define EPSILON 1e-6
+#define EPSILON 1e-5
 
 Eigen::Matrix4f RotateZ(float theta);
 Eigen::Matrix4f RotateX(float theta);

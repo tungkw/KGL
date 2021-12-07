@@ -128,7 +128,7 @@ void Cuboid::Rotation(Eigen::Matrix3f rmat)
 {
     Eigen::Vector4f q_r = kgl::QuaternionFromMatrix(rmat);
     rmat = kgl::MatrixFromQuaternion(q_r);
-    this->quaternion = kgl::QuaternionMul(q_r, kgl::QuaternionFromMatrix(this->pose.block<3, 3>(0, 0)));
+    this->quaternion = kgl::QuaternionMul(q_r, this->quaternion);
     for (int i = 0 ; i < num_vertex; i++)
     {
         vertex[i].pos = rmat * vertex[i].pos;

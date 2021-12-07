@@ -53,57 +53,94 @@ Eigen::Matrix3f Hat(Eigen::Vector3f omega)
 }
 
 /*
+rotation vector
+*/
+
+/*
 Qaternion
 */
 Eigen::Vector4f QuaternionFromMatrix(Eigen::Matrix3f mat)
 {
     Eigen::Vector4f q;
-    float trace = mat(0,0) + mat(1,1) + mat(2,2);
-    float theta = acosf((trace-1.f)/(2.f));
-    if (fabs(sinf(theta)) < EPSILON)
-    {
-        // std::cout << "QUATERNION 1" << std::endl << theta << std::endl;
-        theta = 0.f;
-        q = {0.f, 0.f, 0.f, 1.f};
+    float tr = mat(0,0) + mat(1,1) + mat(2,2);
+
+    if (tr > 0) 
+    { 
+        float S = sqrt(tr+1.0) * 2; // S=4*q(3) 
+        q(3) = 0.25 * S;
+        q(0) = (mat(2,1) - mat(1,2)) / S;
+        q(1) = (mat(0,2) - mat(2,0)) / S; 
+        q(2) = (mat(1,0) - mat(0,1)) / S; 
+    } 
+    else if ((mat(0,0) > mat(1,1))&(mat(0,0) > mat(2,2))) 
+    { 
+        float S = sqrt(1.0 + mat(0,0) - mat(1,1) - mat(2,2)) * 2; // S=4*q(0) 
+        q(3) = (mat(2,1) - mat(1,2)) / S;
+        q(0) = 0.25 * S;
+        q(1) = (mat(0,1) + mat(1,0)) / S; 
+        q(2) = (mat(0,2) + mat(2,0)) / S; 
+    } 
+    else if (mat(1,1) > mat(2,2)) 
+    { 
+        float S = sqrt(1.0 + mat(1,1) - mat(0,0) - mat(2,2)) * 2; // S=4*q(1)
+        q(3) = (mat(0,2) - mat(2,0)) / S;
+        q(0) = (mat(0,1) + mat(1,0)) / S; 
+        q(1) = 0.25 * S;
+        q(2) = (mat(1,2) + mat(2,1)) / S; 
+    } 
+    else 
+    { 
+        float S = sqrt(1.0 + mat(2,2) - mat(0,0) - mat(1,1)) * 2; // S=4*q(2)
+        q(3) = (mat(1,0) - mat(0,1)) / S;
+        q(0) = (mat(0,2) + mat(2,0)) / S;
+        q(1) = (mat(1,2) + mat(2,1)) / S;
+        q(2) = 0.25 * S;
     }
-    else
+    if (q.hasNaN())
     {
-        Eigen::Vector3f omega = Eigen::Vector3f(mat(2,1)-mat(1,2), mat(0,2)-mat(2,0), mat(1,0)-mat(0,1)) / (2.f*sinf(theta));
-        q.block<3, 1>(0,0) = sinf(theta/2.f) * omega.normalized();
-        q(3) = cosf(theta/2.f);
+        std::cout << "QuaternionFromMatrix" << std::endl
+                  << mat << std::endl
+                  << q << std::endl;
+        exit(0);
     }
-    return q.normalized();
+    return q;
 }
 
 Eigen::Matrix3f MatrixFromQuaternion(Eigen::Vector4f q)
 {
-    Eigen::Matrix3f mat, omega_hat;
-    Eigen::Vector3f omega;
-    float half_theta;
-
-    half_theta = acosf(q(3));
-    if (fabs(sinf(half_theta)) < EPSILON)
+    Eigen::Matrix3f mat, v_hat = Hat(q.block<3, 1>(0, 0));
+    mat = Eigen::Matrix3f::Identity() + 2 * q(3) * v_hat + 2 * v_hat * v_hat;
+    if (mat.hasNaN())
     {
-        // std::cout << "QUATERNION 2" << std::endl << half_theta << std::endl;
-        return Eigen::Matrix3f::Identity();
+        std::cout << "MatrixFromQuaternion" << std::endl
+                  << q.transpose() << std::endl
+                  << mat << std::endl;
+        exit(0);
     }
-    else
-    {
-        omega = q.block<3, 1>(0, 0) / sinf(half_theta);
-        omega_hat = Hat(omega);
-        mat = Eigen::Matrix3f::Identity() + omega_hat * sinf(half_theta*2.0f) + omega_hat * omega_hat * (1-cosf(half_theta*2.0f));
-        return mat;
-    }
+    return mat;
 }
 
 Eigen::Vector4f QuaternionMul(Eigen::Vector4f q1, Eigen::Vector4f q2)
 {
     Eigen::Vector4f q;
-    q.block<3, 1>(0,0) = q1.block<3, 1>(0,0) * q2(3) + 
-                         q2.block<3, 1>(0,0) * q1(3) + 
-                         q1.block<3, 1>(0,0).cross(q2.block<3, 1>(0,0));
-    q(3) = q1(3)*q2(3) - q1.block<3, 1>(0,0).transpose().dot(q2.block<3, 1>(0,0));
-    return q.normalized();
+    Eigen::Vector3f w1 = q1.block<3, 1>(0, 0), w2 = q2.block<3, 1>(0, 0);
+    q.block<3, 1>(0,0) = w1 * q2(3) + w2 * q1(3) + Hat(w1) * w2;
+    q(3) = q1(3)*q2(3) - w1.dot(w2);
+    if (q.hasNaN())
+    {
+        std::cout << "QuaternionMul" << std::endl
+                  << "q1 " << q1.hasNaN() << std::endl
+                  << "q2 " << q2.hasNaN() << std::endl;
+    }
+    q = q.normalized();
+    if (q.hasNaN())
+    {
+        std::cout << "QuaternionMul normalized" << std::endl;
+        std::cout << q1.transpose() << std::endl;
+        std::cout << q2.transpose() << std::endl;
+        exit(0);
+    }
+    return q;
 }
 
 
