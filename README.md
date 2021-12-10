@@ -33,3 +33,6 @@ test with
 ## c++
 - template derive
   - through a non-template base class
+
+## quaternion
+- elegent transformation to rotation matrix
