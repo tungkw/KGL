@@ -11,8 +11,8 @@ namespace kgl
 {
 
 
-#define VERTEX_BUFFER_MAX_SIZE  10000
-#define INDEX_BUFFER_MAX_SIZE   10000
+#define VERTEX_BUFFER_MAX_SIZE  5000000
+#define INDEX_BUFFER_MAX_SIZE   5000000
 
 
 template<typename T>
@@ -94,6 +94,15 @@ class LineBuffer
 {
 public:
     LineBuffer(): Buffer<T>(2) {}
+};
+
+
+template<typename T>
+class PointBuffer
+    : public Buffer<T>
+{
+public:
+    PointBuffer(): Buffer<T>(1) {}
 };
 
 

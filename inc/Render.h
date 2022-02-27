@@ -39,6 +39,15 @@ public:
         KGLCALL(glDrawElements(GL_LINES, buffer.GetNumIndex(), GL_UNSIGNED_INT, (void*)0);)
     }
 
+    template<typename T>
+    void Draw(PointBuffer<T>& buffer, Shader& shader)
+    {
+        buffer.Bind();
+        shader.Bind();
+        glPointSize(0.9);
+        KGLCALL(glDrawElements(GL_POINTS, buffer.GetNumIndex(), GL_UNSIGNED_INT, (void*)0);)
+    }
+
 
     void SetKeyCallback(void(*key_callback)(GLFWwindow*, int, int, int, int)) { glfwSetKeyCallback(window, key_callback); }
     void SetCursorPosCallback(void(*cursor_position_callback)(GLFWwindow*, double, double)) { glfwSetCursorPosCallback(window, cursor_position_callback); }

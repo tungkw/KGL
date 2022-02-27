@@ -40,4 +40,4 @@ struct NormalVertice
 } // namespace kgl
 
 
-#endif __KGL_VERTICE_H
+#endif //__KGL_VERTICE_H

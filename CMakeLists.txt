@@ -52,6 +52,7 @@ ELSEIF(CMAKE_SYSTEM_NAME MATCHES "Windows")
     )
 ENDIF()
 
+set(KGL_EXAMPLE ON)
 IF(KGL_EXAMPLE)
     message("KGL_EXAMPLE defined")
     add_executable(example

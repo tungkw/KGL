@@ -6,6 +6,7 @@
 #include "Geometry/Cuboid.h"
 #include "Geometry/Line.h"
 #include "Geometry/Vertice.h"
+#include "Geometry/Point.h"
 
 
     // kgl::Texture texture("res/tex.png");
@@ -60,6 +61,10 @@ int main(void)
     render->SetScrollCallback(scroll_cb);
     render->SetCursorPosCallback(cursor_pos_cb);
 
+    // Point
+    kgl::PointBuffer<kgl::NormalVertice> point_buffer;
+    kgl::PointCloudSurfel points("2.obj");
+
     // triangles
     kgl::TriangleBuffer<kgl::NormalVertice> triangle_buffer;
 
@@ -109,6 +114,21 @@ int main(void)
     {
         /* Render here */
         render->Clear();
+
+        // std::cout << obj.GetPose().block<3,3>(0,0).determinant() << std::endl;
+        // Eigen::Matrix4f N = T * obj.GetPose();
+        // obj.SetPose(N);
+        // obj.Transform(T);
+
+        point_buffer.Clear();
+        point_buffer.Add(&points);
+        point_buffer.Attach();
+
+        shader.Bind();
+        shader.Matrix4f("mv", view * model);
+        shader.Matrix4f("proj", proj);
+        shader.Vectorf("light", {5.f, 5.f, 5.f});
+        render->Draw(point_buffer, shader);
 
 
         // std::cout << obj.GetPose().block<3,3>(0,0).determinant() << std::endl;

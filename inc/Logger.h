@@ -8,12 +8,12 @@
 namespace kgl
 {
     
-#define KGL_LOG_ERROR(x) {if(GLCheckError(#x, __FILE__, __LINE__)) {std::cin.get();exit(-1);}} 
-#define KGLCALL(x) {\
-    GLClearError();\
-    x;\
-    KGL_LOG_ERROR(x);\
-}\
+#define KGL_LOG_ERROR(x) { if(GLCheckError(#x, __FILE__, __LINE__)) { std::cin.get(); exit(-1); } } 
+#define KGLCALL(x)  { \
+                        GLClearError(); \
+                        x; \
+                        KGL_LOG_ERROR(x); \
+                    }
 
 void GLClearError();
 bool GLCheckError(const char *func_name, const char *file, int line);
