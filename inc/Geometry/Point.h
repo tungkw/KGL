@@ -32,11 +32,13 @@ public:
         std::string word;
         file >> word >> num_vertex;
         this->num_primitives = this->num_vertex;
+        float scale = 5;
 
         kgl::NormalVertice vertice;
         for (int i = 0 ; i < this->num_vertex; i++)
         {
             file >> word >> vertice.pos.x() >> vertice.pos.y() >> vertice.pos.z();
+            vertice.pos *= scale;
             this->vertex.push_back(vertice);
             this->primitives.push_back(i);
         }

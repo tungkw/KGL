@@ -29,7 +29,8 @@ int Render::Open(int width, int height, const char* title)
     if(glewInit() != GLEW_OK) std::cout << "error" << std::endl;
     else std::cout << glGetString(GL_VERSION) << std::endl;
 
-    glClearColor(1, 1, 1, 1);
+    // glClearColor(1, 1, 1, 1);
+    glClearColor(0, 0, 0, 1);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
     
